@@ -1,0 +1,19 @@
+{
+  "candidate_pool": [
+    "us-east-1 (N. Virginia)",
+    "us-east-2 (Ohio)",
+    "us-west-2 (Oregon)",
+    "ca-central-1 (Canada)"
+  ],
+  "capacity_cap_pct": 0.7,
+  "n_decisions": 7304,
+  "constrained_scheduler_avg_ci": 111.25379244249726,
+  "realistic_baseline_avg_ci": 305.34123185925523,
+  "hypothetical_efficiency_pct": 63.56411095708854,
+  "winner_distribution": {
+    "ca-central-1 (Canada)": 4869,
+    "us-west-2 (Oregon)": 2091,
+    "us-east-2 (Ohio)": 341,
+    "us-east-1 (N. Virginia)": 3
+  }
+}

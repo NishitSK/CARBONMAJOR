@@ -1,0 +1,110 @@
+{
+  "probers": [
+    "us-east-1 (N. Virginia)",
+    "eu-west-1 (Ireland)",
+    "ap-south-1 (Mumbai)",
+    "ap-southeast-2 (Sydney)",
+    "sa-east-1 (Sao Paulo)",
+    "ap-northeast-1 (Tokyo)"
+  ],
+  "matrix": {
+    "us-east-1 (N. Virginia)": {
+      "eu-west-1 (Ireland)": 68.68,
+      "ap-south-1 (Mumbai)": 184.67,
+      "sa-east-1 (Sao Paulo)": 111.84,
+      "ca-central-1 (Canada)": 14.85,
+      "eu-central-1 (Frankfurt)": 91.08,
+      "us-west-2 (Oregon)": 59.95,
+      "ap-southeast-2 (Sydney)": 219.49,
+      "eu-north-1 (Sweden)": 111.43,
+      "ap-southeast-1 (Singapore)": 219.84,
+      "ap-northeast-1 (Tokyo)": 151.58,
+      "us-east-2 (Ohio)": 11.5,
+      "us-east-1 (N. Virginia)": 0.0
+    },
+    "eu-west-1 (Ireland)": {
+      "us-east-1 (N. Virginia)": 68.42,
+      "ap-south-1 (Mumbai)": 121.59,
+      "sa-east-1 (Sao Paulo)": 176.17,
+      "ca-central-1 (Canada)": 67.44,
+      "eu-central-1 (Frankfurt)": 19.71,
+      "us-west-2 (Oregon)": 116.79,
+      "ap-southeast-2 (Sydney)": 253.82,
+      "eu-north-1 (Sweden)": 36.35,
+      "ap-southeast-1 (Singapore)": 174.77,
+      "ap-northeast-1 (Tokyo)": 202.67,
+      "us-east-2 (Ohio)": 79.37,
+      "eu-west-1 (Ireland)": 0.0
+    },
+    "ap-south-1 (Mumbai)": {
+      "us-east-1 (N. Virginia)": 184.73,
+      "eu-west-1 (Ireland)": 120.11,
+      "sa-east-1 (Sao Paulo)": 293.67,
+      "ca-central-1 (Canada)": 186.17,
+      "eu-central-1 (Frankfurt)": 124.97,
+      "us-west-2 (Oregon)": 231.38,
+      "ap-southeast-2 (Sydney)": 152.05,
+      "eu-north-1 (Sweden)": 145.98,
+      "ap-southeast-1 (Singapore)": 61.14,
+      "ap-northeast-1 (Tokyo)": 133.5,
+      "us-east-2 (Ohio)": 207.69,
+      "ap-south-1 (Mumbai)": 0.0
+    },
+    "ap-southeast-2 (Sydney)": {
+      "us-east-1 (N. Virginia)": 210.1,
+      "eu-west-1 (Ireland)": 253.76,
+      "ap-south-1 (Mumbai)": 153.43,
+      "sa-east-1 (Sao Paulo)": 307.95,
+      "ca-central-1 (Canada)": 195.36,
+      "eu-central-1 (Frankfurt)": 250.44,
+      "us-west-2 (Oregon)": 140.11,
+      "eu-north-1 (Sweden)": 270.45,
+      "ap-southeast-1 (Singapore)": 92.73,
+      "ap-northeast-1 (Tokyo)": 114.12,
+      "us-east-2 (Ohio)": 187.56,
+      "ap-southeast-2 (Sydney)": 0.0
+    },
+    "sa-east-1 (Sao Paulo)": {
+      "us-east-1 (N. Virginia)": 111.92,
+      "eu-west-1 (Ireland)": 176.01,
+      "ap-south-1 (Mumbai)": 293.53,
+      "ca-central-1 (Canada)": 123.07,
+      "eu-central-1 (Frankfurt)": 200.17,
+      "us-west-2 (Oregon)": 172.44,
+      "ap-southeast-2 (Sydney)": 309.04,
+      "eu-north-1 (Sweden)": 220.61,
+      "ap-southeast-1 (Singapore)": 329.74,
+      "ap-northeast-1 (Tokyo)": 257.15,
+      "us-east-2 (Ohio)": 122.38,
+      "sa-east-1 (Sao Paulo)": 0.0
+    },
+    "ap-northeast-1 (Tokyo)": {
+      "us-east-1 (N. Virginia)": 148.46,
+      "eu-west-1 (Ireland)": 199.65,
+      "ap-south-1 (Mumbai)": 135.88,
+      "sa-east-1 (Sao Paulo)": 260.66,
+      "ca-central-1 (Canada)": 144.27,
+      "eu-central-1 (Frankfurt)": 226.69,
+      "us-west-2 (Oregon)": 98.79,
+      "ap-southeast-2 (Sydney)": 103.34,
+      "eu-north-1 (Sweden)": 247.06,
+      "ap-southeast-1 (Singapore)": 68.33,
+      "us-east-2 (Ohio)": 136.59,
+      "ap-northeast-1 (Tokyo)": 0.0
+    }
+  },
+  "cross_prober_average": {
+    "us-east-1 (N. Virginia)": 144.73,
+    "eu-west-1 (Ireland)": 163.64,
+    "ap-south-1 (Mumbai)": 177.82,
+    "sa-east-1 (Sao Paulo)": 230.06,
+    "ca-central-1 (Canada)": 121.86,
+    "eu-central-1 (Frankfurt)": 152.18,
+    "us-west-2 (Oregon)": 136.58,
+    "ap-southeast-2 (Sydney)": 207.55,
+    "eu-north-1 (Sweden)": 171.98,
+    "ap-southeast-1 (Singapore)": 157.76,
+    "ap-northeast-1 (Tokyo)": 171.8,
+    "us-east-2 (Ohio)": 124.18
+  }
+}

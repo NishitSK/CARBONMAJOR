@@ -1,0 +1,14 @@
+{
+  "us-east-1 (N. Virginia)": {
+    "peak_cpu_pct": 34.02,
+    "avg_cpu_pct": 11.55
+  },
+  "eu-west-1 (Ireland)": {
+    "peak_cpu_pct": 13.03,
+    "avg_cpu_pct": 6.65
+  },
+  "ap-south-1 (Mumbai)": {
+    "peak_cpu_pct": 11.69,
+    "avg_cpu_pct": 5.98
+  }
+}

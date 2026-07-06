@@ -1,0 +1,3 @@
+@echo off
+cd /d "C:\Users\Acer\Desktop\Newfolder\CARBON_MAJOR\carbon_scheduler"
+python aws\run_one_cycle.py >> data\cycle_output.log 2>&1

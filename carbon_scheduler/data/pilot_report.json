@@ -1,0 +1,81 @@
+{
+  "n_cycles": 2,
+  "latency_by_region": {
+    "us-east-1 (N. Virginia)": {
+      "mean": 397.05,
+      "min": 295.55,
+      "max": 498.55,
+      "n": 2
+    },
+    "eu-west-1 (Ireland)": {
+      "mean": 302.22,
+      "min": 297.87,
+      "max": 306.57,
+      "n": 2
+    },
+    "ap-south-1 (Mumbai)": {
+      "mean": 94.805,
+      "min": 93.83,
+      "max": 95.78,
+      "n": 2
+    },
+    "sa-east-1 (Sao Paulo)": {
+      "mean": 589.7,
+      "min": 555.03,
+      "max": 624.37,
+      "n": 2
+    },
+    "ca-central-1 (Canada)": {
+      "mean": 406.81,
+      "min": 405.97,
+      "max": 407.65,
+      "n": 2
+    },
+    "eu-central-1 (Frankfurt)": {
+      "mean": 274.515,
+      "min": 232.23,
+      "max": 316.8,
+      "n": 2
+    },
+    "us-west-2 (Oregon)": {
+      "mean": 369.065,
+      "min": 331.81,
+      "max": 406.32,
+      "n": 2
+    },
+    "ap-southeast-2 (Sydney)": {
+      "mean": 406.42,
+      "min": 406.36,
+      "max": 406.48,
+      "n": 2
+    },
+    "eu-north-1 (Sweden)": {
+      "mean": 240.84,
+      "min": 226.22,
+      "max": 255.46,
+      "n": 2
+    },
+    "ap-southeast-1 (Singapore)": {
+      "mean": 144.97,
+      "min": 87.74,
+      "max": 202.2,
+      "n": 2
+    },
+    "ap-northeast-1 (Tokyo)": {
+      "mean": 192.24,
+      "min": 173.31,
+      "max": 211.17,
+      "n": 2
+    },
+    "us-east-2 (Ohio)": {
+      "mean": 520.7049999999999,
+      "min": 432.03,
+      "max": 609.38,
+      "n": 2
+    }
+  },
+  "selection_counts": {
+    "ap-southeast-1 (Singapore)": 1,
+    "ap-northeast-1 (Tokyo)": 1
+  }
+}

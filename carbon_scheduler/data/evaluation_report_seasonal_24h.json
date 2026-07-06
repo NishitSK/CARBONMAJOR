@@ -1,0 +1,340 @@
+{
+  "AU-NSW": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 90.72008340891865,
+      "arima_mae": 187.7860416666667,
+      "persistence_mae": 166.42111111111112
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 95.26859847505268,
+      "arima_mae": 161.60390624999994,
+      "persistence_mae": 181.31675347222222
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 71.77619527370771,
+      "arima_mae": 142.77779513888888,
+      "persistence_mae": 140.4107986111111
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 127.30817868672932,
+      "arima_mae": 187.46319444444444,
+      "persistence_mae": 178.56128472222224
+    }
+  },
+  "BR": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 8.939376223279075,
+      "arima_mae": 4.5613020833333335,
+      "persistence_mae": 4.099878472222223
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 5.9422501263175045,
+      "arima_mae": 5.600364583333334,
+      "persistence_mae": 5.78984375
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 9.805701438144572,
+      "arima_mae": 12.063454861111111,
+      "persistence_mae": 12.456059027777778
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 11.071739127965026,
+      "arima_mae": 13.305972222222223,
+      "persistence_mae": 11.990052083333332
+    }
+  },
+  "CA-QC": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 3.513475222746946,
+      "arima_mae": 3.704878472222221,
+      "persistence_mae": 4.411336805555556
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 5.585561608713534,
+      "arima_mae": 4.522777777777778,
+      "persistence_mae": 4.780815972222222
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 12.745925811568485,
+      "arima_mae": 7.512690972222223,
+      "persistence_mae": 7.51578125
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 11.698476428025296,
+      "arima_mae": 4.666302083333332,
+      "persistence_mae": 3.801979166666667
+    }
+  },
+  "DE": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 61.115074804839146,
+      "arima_mae": 76.32614583333333,
+      "persistence_mae": 71.28972222222222
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 89.3640178803008,
+      "arima_mae": 90.68619791666669,
+      "persistence_mae": 89.700625
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 103.05552646151773,
+      "arima_mae": 66.88432291666665,
+      "persistence_mae": 69.01368055555555
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 56.62974490115652,
+      "arima_mae": 57.645086805555565,
+      "persistence_mae": 59.0313888888889
+    }
+  },
+  "IE": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 100.68838859108199,
+      "arima_mae": 92.98126736111112,
+      "persistence_mae": 85.73496527777776
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 60.97956629611915,
+      "arima_mae": 63.03480902777778,
+      "persistence_mae": 55.26397569444446
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 86.9637160122101,
+      "arima_mae": 57.55010416666667,
+      "persistence_mae": 53.707413194444435
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 72.39709360516915,
+      "arima_mae": 51.36256944444445,
+      "persistence_mae": 48.11875
+    }
+  },
+  "IN-WE": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 49.898567583120105,
+      "arima_mae": 57.26645833333333,
+      "persistence_mae": 54.63706597222221
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 45.21504203799079,
+      "arima_mae": 54.98652777777777,
+      "persistence_mae": 60.82725694444445
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 51.60817332590207,
+      "arima_mae": 60.15769097222221,
+      "persistence_mae": 67.49586805555556
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 63.921123125414454,
+      "arima_mae": 106.67897569444449,
+      "persistence_mae": 80.05133680555555
+    }
+  },
+  "JP": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 41.76808859564573,
+      "arima_mae": 40.530156250000005,
+      "persistence_mae": 43.49756944444445
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 83.0307757720817,
+      "arima_mae": 110.99887152777778,
+      "persistence_mae": 119.13958333333333
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 53.27208372240164,
+      "arima_mae": 47.01644097222223,
+      "persistence_mae": 68.58444444444446
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 55.44822057155065,
+      "arima_mae": 82.9891840277778,
+      "persistence_mae": 75.71467013888889
+    }
+  },
+  "SE": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 2.6351564915617924,
+      "arima_mae": 2.9618750000000005,
+      "persistence_mae": 2.5219444444444448
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 4.277984706699435,
+      "arima_mae": 6.648072916666668,
+      "persistence_mae": 6.414999999999999
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 5.990722905037821,
+      "arima_mae": 15.345364583333335,
+      "persistence_mae": 6.245017361111111
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 3.4325619460735464,
+      "arima_mae": 1.292309027777778,
+      "persistence_mae": 1.241666666666667
+    }
+  },
+  "SG": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 12.199041738146917,
+      "arima_mae": 22.27020833333334,
+      "persistence_mae": 17.724357638888893
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 13.356809143792432,
+      "arima_mae": 20.822604166666668,
+      "persistence_mae": 18.664583333333333
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 13.119315608364223,
+      "arima_mae": 18.458611111111107,
+      "persistence_mae": 18.11881944444445
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 12.892314170824571,
+      "arima_mae": 20.562638888888888,
+      "persistence_mae": 18.345399305555553
+    }
+  },
+  "US-MIDA-PJM": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 32.355940205009325,
+      "arima_mae": 17.70300347222222,
+      "persistence_mae": 16.27642361111111
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 26.149111466984152,
+      "arima_mae": 17.02473958333333,
+      "persistence_mae": 16.769322916666663
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 36.24741315672742,
+      "arima_mae": 20.948333333333334,
+      "persistence_mae": 18.881597222222226
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 31.645503198179508,
+      "arima_mae": 29.863645833333337,
+      "persistence_mae": 29.85991319444444
+    }
+  },
+  "US-MIDW-MISO": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 48.66650169475108,
+      "arima_mae": 52.56296875,
+      "persistence_mae": 48.275868055555556
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 33.60460077960561,
+      "arima_mae": 31.968090277777776,
+      "persistence_mae": 31.157725694444448
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 32.47061608113348,
+      "arima_mae": 42.853732638888886,
+      "persistence_mae": 38.09465277777779
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 72.21250255599514,
+      "arima_mae": 72.68182291666666,
+      "persistence_mae": 71.71104166666665
+    }
+  },
+  "US-NW-PACW": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 30.508458595641414,
+      "arima_mae": 60.02354166666667,
+      "persistence_mae": 52.322812500000005
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 45.960600489494226,
+      "arima_mae": 29.27871527777778,
+      "persistence_mae": 26.849618055555553
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 30.079037454797277,
+      "arima_mae": 38.73015625,
+      "persistence_mae": 38.13263888888889
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 42.98942211739072,
+      "arima_mae": 59.44373263888889,
+      "persistence_mae": 55.234201388888884
+    }
+  },
+  "ZA": {
+    "Winter": {
+      "n_anchors": 24,
+      "lstm_mae": 25.31376209369756,
+      "arima_mae": 28.91588541666667,
+      "persistence_mae": 27.07880208333334
+    },
+    "Spring": {
+      "n_anchors": 24,
+      "lstm_mae": 19.426936656111433,
+      "arima_mae": 27.047326388888887,
+      "persistence_mae": 26.190381944444436
+    },
+    "Summer": {
+      "n_anchors": 24,
+      "lstm_mae": 25.36104821295063,
+      "arima_mae": 26.74857638888889,
+      "persistence_mae": 25.25821180555556
+    },
+    "Autumn": {
+      "n_anchors": 24,
+      "lstm_mae": 36.23127309932682,
+      "arima_mae": 27.529409722222226,
+      "persistence_mae": 27.48982638888889
+    }
+  }
+}

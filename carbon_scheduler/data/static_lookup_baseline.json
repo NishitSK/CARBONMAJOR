@@ -1,0 +1,10 @@
+{
+  "n_decisions": 7304,
+  "scoring_method": "threshold_v1",
+  "static_lookup_region": "eu-north-1 (Sweden)",
+  "scheduler_avg_ci": 22.09677026286966,
+  "static_lookup_avg_ci": 23.6327573932092,
+  "fixed_baseline_avg_ci": 413.64300109529023,
+  "scheduler_vs_static_lookup_pct": 6.499398715026372,
+  "scheduler_vs_fixed_baseline_pct": 94.65800939352066
+}
