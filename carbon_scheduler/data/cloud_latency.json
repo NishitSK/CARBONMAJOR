@@ -1,0 +1,17 @@
+{
+  "prober": "multi-vantage-average (6 regions)",
+  "latency_ms": {
+    "us-east-1 (N. Virginia)": 144.73,
+    "eu-west-1 (Ireland)": 163.64,
+    "ap-south-1 (Mumbai)": 177.82,
+    "sa-east-1 (Sao Paulo)": 230.06,
+    "ca-central-1 (Canada)": 121.86,
+    "eu-central-1 (Frankfurt)": 152.18,
+    "us-west-2 (Oregon)": 136.58,
+    "ap-southeast-2 (Sydney)": 207.55,
+    "eu-north-1 (Sweden)": 171.98,
+    "ap-southeast-1 (Singapore)": 157.76,
+    "ap-northeast-1 (Tokyo)": 171.8,
+    "us-east-2 (Ohio)": 124.18
+  }
+}

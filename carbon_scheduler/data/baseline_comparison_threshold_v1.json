@@ -1,0 +1,8 @@
+{
+  "scoring_method": "threshold_v1",
+  "n_cycles": 13,
+  "decisions_changed_vs_linear_v1": 1,
+  "scheduler_avg_ci": 174.84615384615384,
+  "round_robin_avg_ci": 336.7692307692308,
+  "fixed_region_avg_ci": 486.9230769230769
+}

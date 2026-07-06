@@ -1,0 +1,74 @@
+{
+  "vantage_point_assumed": {
+    "lat": 12.97,
+    "lng": 77.59,
+    "label": "Bangalore, India (assumed)"
+  },
+  "model": {
+    "intercept": 41.921236079955605,
+    "slope": 0.020719636988191806,
+    "r_squared": 0.8490870150264753
+  },
+  "regions": [
+    {
+      "region": "us-east-1 (N. Virginia)",
+      "distance_km": 13809.06966380244,
+      "avg_latency_ms": 276.8246153846154
+    },
+    {
+      "region": "eu-west-1 (Ireland)",
+      "distance_km": 8565.99646823729,
+      "avg_latency_ms": 201.50076923076924
+    },
+    {
+      "region": "ap-south-1 (Mumbai)",
+      "distance_km": 845.1290390114085,
+      "avg_latency_ms": 59.35307692307692
+    },
+    {
+      "region": "sa-east-1 (Sao Paulo)",
+      "distance_km": 14044.256170637307,
+      "avg_latency_ms": 437.20153846153846
+    },
+    {
+      "region": "ca-central-1 (Canada)",
+      "distance_km": 12897.197246328851,
+      "avg_latency_ms": 271.8615384615385
+    },
+    {
+      "region": "eu-central-1 (Frankfurt)",
+      "distance_km": 7405.997132334269,
+      "avg_latency_ms": 192.97846153846154
+    },
+    {
+      "region": "us-west-2 (Oregon)",
+      "distance_km": 13251.723093333345,
+      "avg_latency_ms": 321.46999999999997
+    },
+    {
+      "region": "ap-southeast-2 (Sydney)",
+      "distance_km": 9348.313179765039,
+      "avg_latency_ms": 234.9269230769231
+    },
+    {
+      "region": "eu-north-1 (Sweden)",
+      "distance_km": 7069.752049669253,
+      "avg_latency_ms": 212.6523076923077
+    },
+    {
+      "region": "ap-southeast-1 (Singapore)",
+      "distance_km": 3164.113123367124,
+      "avg_latency_ms": 105.24076923076923
+    },
+    {
+      "region": "ap-northeast-1 (Tokyo)",
+      "distance_km": 6662.104407473229,
+      "avg_latency_ms": 184.2
+    },
+    {
+      "region": "us-east-2 (Ohio)",
+      "distance_km": 13776.043410678734,
+      "avg_latency_ms": 301.4030769230769
+    }
+  ]
+}

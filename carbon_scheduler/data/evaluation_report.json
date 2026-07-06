@@ -1,0 +1,93 @@
+[
+  {
+    "zone": "AU-NSW",
+    "n_anchors": 27,
+    "lstm_mae": 117.17069734266884,
+    "arima_mae": 119.7588888888889,
+    "persistence_mae": 119.42938271604936
+  },
+  {
+    "zone": "BR",
+    "n_anchors": 27,
+    "lstm_mae": 7.512590785377923,
+    "arima_mae": 4.674629629629629,
+    "persistence_mae": 4.502407407407408
+  },
+  {
+    "zone": "CA-QC",
+    "n_anchors": 27,
+    "lstm_mae": 2.308342006173398,
+    "arima_mae": 1.6018518518518519,
+    "persistence_mae": 1.6341358024691361
+  },
+  {
+    "zone": "DE",
+    "n_anchors": 27,
+    "lstm_mae": 61.1559269939832,
+    "arima_mae": 32.04333333333334,
+    "persistence_mae": 31.952222222222222
+  },
+  {
+    "zone": "IE",
+    "n_anchors": 27,
+    "lstm_mae": 34.00886378645162,
+    "arima_mae": 26.314012345679007,
+    "persistence_mae": 27.28820987654321
+  },
+  {
+    "zone": "IN-WE",
+    "n_anchors": 27,
+    "lstm_mae": 38.259962249402804,
+    "arima_mae": 56.42598765432098,
+    "persistence_mae": 39.59666666666667
+  },
+  {
+    "zone": "JP",
+    "n_anchors": 27,
+    "lstm_mae": 34.92513979561168,
+    "arima_mae": 23.709876543209877,
+    "persistence_mae": 56.22506172839506
+  },
+  {
+    "zone": "SE",
+    "n_anchors": 27,
+    "lstm_mae": 3.064391382988313,
+    "arima_mae": 1.1422839506172842,
+    "persistence_mae": 0.9709259259259257
+  },
+  {
+    "zone": "SG",
+    "n_anchors": 27,
+    "lstm_mae": 5.863245962755178,
+    "arima_mae": 13.916728395061723,
+    "persistence_mae": 13.663395061728394
+  },
+  {
+    "zone": "US-MIDA-PJM",
+    "n_anchors": 27,
+    "lstm_mae": 25.30840824159575,
+    "arima_mae": 8.812098765432099,
+    "persistence_mae": 8.388271604938272
+  },
+  {
+    "zone": "US-MIDW-MISO",
+    "n_anchors": 27,
+    "lstm_mae": 31.693089075883226,
+    "arima_mae": 20.142407407407404,
+    "persistence_mae": 20.029197530864206
+  },
+  {
+    "zone": "US-NW-PACW",
+    "n_anchors": 27,
+    "lstm_mae": 30.85475208310664,
+    "arima_mae": 29.246172839506176,
+    "persistence_mae": 27.68796296296297
+  },
+  {
+    "zone": "ZA",
+    "n_anchors": 27,
+    "lstm_mae": 101.5496170411112,
+    "arima_mae": 30.84104938271605,
+    "persistence_mae": 27.103703703703697
+  }
+]

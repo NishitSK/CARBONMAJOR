@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>Carbon Intensity: Predicted vs Actual</title>
+<script src='https://cdn.jsdelivr.net/npm/chart.js@4'></script>
+<script src='https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3'></script>
+<style>
+  body { background:#0A0E15; color:#C8D6E5; font-family:'IBM Plex Sans',sans-serif; margin:0; padding:24px; }
+  h1 { color:#5EE6C8; font-size:1.4rem; margin-bottom:4px; }
+  .sub { color:#6B7E93; font-size:0.85rem; margin-bottom:24px; }
+  .chart-wrap { background:#10151F; border-radius:12px; padding:20px; margin-bottom:24px; }
+  .mae-box { background:#10151F; border-radius:12px; padding:20px; }
+  .mae-box h3 { color:#5EE6C8; margin-top:0; }
+  table { border-collapse:collapse; width:100%; }
+  th { color:#5EE6C8; text-align:left; padding:6px 12px; border-bottom:1px solid #1E2A3A; }
+  td { padding:6px 12px; border-bottom:1px solid #1A2030; }
+  .note { color:#6B7E93; font-size:0.8rem; margin-top:16px; }
+</style>
+</head>
+<body>
+<h1>Carbon Intensity — Predicted vs Actual</h1>
+<div class='sub'>Predictions generated at 03 Jul 04:46 PM IST &nbsp;|&nbsp; Dashed = ARIMA forecast &nbsp;|&nbsp; Dots = Real measured values</div>
+<div class='chart-wrap'>
+  <canvas id='chart' height='120'></canvas>
+</div>
+
+<p class='note'>Refresh this file after each new pilot cycle to see updated actuals.</p>
+<script>
+const ctx = document.getElementById('chart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: { datasets: [{
+            label: 'eu-north-1 (Sweden) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 27.6}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 27.6}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 27.6}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 27.3}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 27.4}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 27.4}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 27.4}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 27.4}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 27.5}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 27.4}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 27.5}],
+            borderColor: '#5EE6C8',
+            backgroundColor: '#5EE6C822',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'eu-north-1 (Sweden) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 27}],
+                borderColor: '#5EE6C8',
+                backgroundColor: '#5EE6C8',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'ca-central-1 (Canada) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 54.9}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 54.3}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 54.3}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 54.0}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 54.1}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 54.0}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 54.0}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 53.9}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 53.9}],
+            borderColor: '#E8C547',
+            backgroundColor: '#E8C54722',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'ca-central-1 (Canada) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 52}],
+                borderColor: '#E8C547',
+                backgroundColor: '#E8C547',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'sa-east-1 (Sao Paulo) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 109.2}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 107.2}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 109.1}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 107.2}],
+            borderColor: '#E85D4A',
+            backgroundColor: '#E85D4A22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'sa-east-1 (Sao Paulo) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 104}],
+                borderColor: '#E85D4A',
+                backgroundColor: '#E85D4A',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'us-west-2 (Oregon) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 156.7}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 155.8}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 159.0}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 156.1}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 158.0}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 157.0}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 157.4}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 157.3}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 157.3}],
+            borderColor: '#7B9FE0',
+            backgroundColor: '#7B9FE022',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'us-west-2 (Oregon) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 155}],
+                borderColor: '#7B9FE0',
+                backgroundColor: '#7B9FE0',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'eu-central-1 (Frankfurt) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 97.9}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 94.5}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 95.9}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 95.4}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 95.7}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 95.7}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 95.6}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 95.6}],
+            borderColor: '#E8853D',
+            backgroundColor: '#E8853D22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'eu-central-1 (Frankfurt) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 105}],
+                borderColor: '#E8853D',
+                backgroundColor: '#E8853D',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'eu-west-1 (Ireland) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 271.1}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 268.7}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 270.9}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 269.0}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 270.6}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 269.3}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 270.4}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 269.5}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 270.2}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 269.6}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 270.1}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 269.7}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 270.0}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 269.7}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 270.0}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 269.8}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 269.9}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 269.8}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 269.9}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 269.8}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 269.9}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 269.8}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 269.9}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 269.9}],
+            borderColor: '#3DDC84',
+            backgroundColor: '#3DDC8422',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'eu-west-1 (Ireland) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 229}],
+                borderColor: '#3DDC84',
+                backgroundColor: '#3DDC84',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'ap-northeast-1 (Tokyo) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 476.2}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 475.0}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 475.6}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 475.1}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 475.4}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 475.1}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 475.3}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 475.2}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 475.2}],
+            borderColor: '#C97BF5',
+            backgroundColor: '#C97BF522',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'ap-northeast-1 (Tokyo) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 467}],
+                borderColor: '#C97BF5',
+                backgroundColor: '#C97BF5',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'ap-southeast-2 (Sydney) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 597.9}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 597.1}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 600.9}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 600.8}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 599.5}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 599.7}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 600.1}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 600.0}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 600.0}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 599.9}],
+            borderColor: '#F57BBF',
+            backgroundColor: '#F57BBF22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'ap-southeast-2 (Sydney) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 597}],
+                borderColor: '#F57BBF',
+                backgroundColor: '#F57BBF',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'us-east-1 (N. Virginia) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 493.8}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 472.9}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 472.7}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 492.4}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 472.7}],
+            borderColor: '#7BE0E0',
+            backgroundColor: '#7BE0E022',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'us-east-1 (N. Virginia) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 482}],
+                borderColor: '#7BE0E0',
+                backgroundColor: '#7BE0E0',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'ap-southeast-1 (Singapore) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 499.8}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 501.5}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 499.5}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 501.4}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 499.6}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 501.3}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 499.7}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 501.2}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 499.8}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 501.1}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 499.9}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 501.1}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 499.9}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 501.0}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 500.0}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 500.9}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 500.1}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 500.9}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 500.1}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 500.8}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 500.1}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 500.8}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 500.2}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 500.8}],
+            borderColor: '#E0A87B',
+            backgroundColor: '#E0A87B22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'ap-southeast-1 (Singapore) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 495}],
+                borderColor: '#E0A87B',
+                backgroundColor: '#E0A87B',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'us-east-2 (Ohio) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 535.2}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 538.6}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 536.1}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 537.9}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 536.6}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 537.5}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 536.9}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 537.3}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 537.0}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 537.2}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 537.1}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 537.1}],
+            borderColor: '#A8E07B',
+            backgroundColor: '#A8E07B22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'us-east-2 (Ohio) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 530}],
+                borderColor: '#A8E07B',
+                backgroundColor: '#A8E07B',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            },
+{
+            label: 'ap-south-1 (Mumbai) (predicted)',
+            data: [{x: new Date('2026-07-03T12:16:05.446879+00:00'), y: 591.5}, {x: new Date('2026-07-03T13:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-03T14:16:05.446879+00:00'), y: 599.7}, {x: new Date('2026-07-03T15:16:05.446879+00:00'), y: 592.6}, {x: new Date('2026-07-03T16:16:05.446879+00:00'), y: 602.0}, {x: new Date('2026-07-03T17:16:05.446879+00:00'), y: 596.0}, {x: new Date('2026-07-03T18:16:05.446879+00:00'), y: 595.5}, {x: new Date('2026-07-03T19:16:05.446879+00:00'), y: 601.4}, {x: new Date('2026-07-03T20:16:05.446879+00:00'), y: 594.2}, {x: new Date('2026-07-03T21:16:05.446879+00:00'), y: 598.4}, {x: new Date('2026-07-03T22:16:05.446879+00:00'), y: 599.3}, {x: new Date('2026-07-03T23:16:05.446879+00:00'), y: 594.4}, {x: new Date('2026-07-04T00:16:05.446879+00:00'), y: 600.0}, {x: new Date('2026-07-04T01:16:05.446879+00:00'), y: 597.0}, {x: new Date('2026-07-04T02:16:05.446879+00:00'), y: 596.0}, {x: new Date('2026-07-04T03:16:05.446879+00:00'), y: 599.9}, {x: new Date('2026-07-04T04:16:05.446879+00:00'), y: 595.7}, {x: new Date('2026-07-04T05:16:05.446879+00:00'), y: 597.8}, {x: new Date('2026-07-04T06:16:05.446879+00:00'), y: 598.8}, {x: new Date('2026-07-04T07:16:05.446879+00:00'), y: 595.6}, {x: new Date('2026-07-04T08:16:05.446879+00:00'), y: 598.8}, {x: new Date('2026-07-04T09:16:05.446879+00:00'), y: 597.5}, {x: new Date('2026-07-04T10:16:05.446879+00:00'), y: 596.4}, {x: new Date('2026-07-04T11:16:05.446879+00:00'), y: 599.0}],
+            borderColor: '#E07B7B',
+            backgroundColor: '#E07B7B22',
+            borderDash: [6, 3],
+            pointRadius: 0,
+            tension: 0.3,
+            yAxisID: 'y'
+        },
+{
+                label: 'ap-south-1 (Mumbai) (actual)',
+                data: [{x: new Date('2026-07-03T11:30:06.471598+00:00'), y: 569}],
+                borderColor: '#E07B7B',
+                backgroundColor: '#E07B7B',
+                borderDash: [],
+                pointRadius: 6,
+                pointStyle: 'circle',
+                showLine: false,
+                yAxisID: 'y'
+            }] },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#C8D6E5', font: { size: 11 } } },
+      tooltip: { backgroundColor: '#10151F', titleColor: '#5EE6C8', bodyColor: '#C8D6E5' }
+    },
+    scales: {
+      x: {
+        type: 'time',
+        time: { unit: 'hour', displayFormats: { hour: 'dd MMM HH:mm' } },
+        ticks: { color: '#6B7E93' },
+        grid: { color: '#1A2030' }
+      },
+      y: {
+        title: { display: true, text: 'Carbon Intensity (gCO2/kWh)', color: '#6B7E93' },
+        ticks: { color: '#6B7E93' },
+        grid: { color: '#1A2030' }
+      }
+    }
+  }
+});
+</script>
+</body>
+</html>

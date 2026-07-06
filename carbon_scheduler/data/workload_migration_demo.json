@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-07-04T09:48:44.586243+00:00",
+  "scheduler_decision": {
+    "region": "ca-central-1 (Canada)",
+    "score": 0.1043,
+    "carbon_intensity": 55.0,
+    "latency_ms": 14.48
+  },
+  "job_execution": {
+    "status": "Success",
+    "output": {
+      "job": "carbon_scheduler_demo_job",
+      "hash_iterations": 44837592,
+      "duration_s": 45.0
+    }
+  },
+  "confirmed_peak_cpu_pct": 37.08,
+  "cpu_confirmation_note": "Initial 10s post-job check read 0.26% due to CloudWatch's ~1-5min metric ingestion lag; rechecked with a wider window and found the correct spike (37.08% max) in the 60s bucket coinciding with job execution.",
+  "scope_note": "Single job deployed to the scheduler's top-ranked region via SSM. Does not demonstrate live workload migration (state transfer, traffic cutover) between regions - stated explicitly as out of scope."
+}

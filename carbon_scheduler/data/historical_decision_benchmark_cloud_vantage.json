@@ -1,0 +1,12 @@
+{
+  "n_decisions": 7304,
+  "latency_source": "real EC2-to-EC2 via SSM, prober=multi-vantage-average (6 regions)",
+  "scheduler_avg_ci": 22.09677026286966,
+  "fixed_region_avg_ci": 413.64300109529023,
+  "round_robin_avg_ci": 370.40073110624314,
+  "winner_distribution": {
+    "eu-north-1 (Sweden)": 6051,
+    "ca-central-1 (Canada)": 1249,
+    "us-west-2 (Oregon)": 4
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "n_cycles": 13,
+  "scheduler_avg_ci": 184.92307692307693,
+  "always_cheapest_avg_ci": 21.76923076923077,
+  "round_robin_avg_ci": 336.7692307692308,
+  "fixed_region_avg_ci": 486.9230769230769
+}

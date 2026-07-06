@@ -1,0 +1,74 @@
+{
+  "us-east-1 (N. Virginia)": {
+    "aws_region": "us-east-1",
+    "instance_id": "i-0fd5ddab64838d3e2",
+    "public_ip": "3.238.154.118",
+    "electricity_maps_zone": "US-MIDA-PJM"
+  },
+  "eu-west-1 (Ireland)": {
+    "aws_region": "eu-west-1",
+    "instance_id": "i-0714eeef3f46d677d",
+    "public_ip": "3.255.126.200",
+    "electricity_maps_zone": "IE"
+  },
+  "ap-south-1 (Mumbai)": {
+    "aws_region": "ap-south-1",
+    "instance_id": "i-0c77f20220d527e61",
+    "public_ip": "13.233.229.240",
+    "electricity_maps_zone": "IN-WE"
+  },
+  "sa-east-1 (Sao Paulo)": {
+    "aws_region": "sa-east-1",
+    "instance_id": "i-0625e5064b5020afb",
+    "public_ip": "18.229.159.199",
+    "electricity_maps_zone": "BR"
+  },
+  "ca-central-1 (Canada)": {
+    "aws_region": "ca-central-1",
+    "instance_id": "i-0470275c57ff070a1",
+    "public_ip": "3.98.56.203",
+    "electricity_maps_zone": "CA-QC"
+  },
+  "eu-central-1 (Frankfurt)": {
+    "aws_region": "eu-central-1",
+    "instance_id": "i-0b0a9b63fafacd153",
+    "public_ip": "18.153.98.133",
+    "electricity_maps_zone": "DE"
+  },
+  "us-west-2 (Oregon)": {
+    "aws_region": "us-west-2",
+    "instance_id": "i-0d502a98941537522",
+    "public_ip": "18.237.11.106",
+    "electricity_maps_zone": "US-NW-PACW"
+  },
+  "ap-southeast-2 (Sydney)": {
+    "aws_region": "ap-southeast-2",
+    "instance_id": "i-0a1e57037657653e8",
+    "public_ip": "54.66.47.110",
+    "electricity_maps_zone": "AU-NSW"
+  },
+  "eu-north-1 (Sweden)": {
+    "aws_region": "eu-north-1",
+    "instance_id": "i-0e9767d3050a23219",
+    "public_ip": "56.228.28.225",
+    "electricity_maps_zone": "SE"
+  },
+  "ap-southeast-1 (Singapore)": {
+    "aws_region": "ap-southeast-1",
+    "instance_id": "i-037032a1f6b561ce2",
+    "public_ip": "18.141.178.230",
+    "electricity_maps_zone": "SG"
+  },
+  "ap-northeast-1 (Tokyo)": {
+    "aws_region": "ap-northeast-1",
+    "instance_id": "i-0fdae5b5a85e3d0c7",
+    "public_ip": "52.198.209.230",
+    "electricity_maps_zone": "JP"
+  },
+  "us-east-2 (Ohio)": {
+    "aws_region": "us-east-2",
+    "instance_id": "i-032af2669cd370162",
+    "public_ip": "3.133.145.164",
+    "electricity_maps_zone": "US-MIDW-MISO"
+  }
+}

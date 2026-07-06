@@ -1,0 +1,8 @@
+{
+  "n_decisions": 7304,
+  "date_range": "2021-01-01 to 2025-12-31 (sampled every 6h)",
+  "scheduler_avg_ci": 360.7177300109529,
+  "fixed_region_avg_ci": 413.64300109529023,
+  "round_robin_avg_ci": 385.42572699890474,
+  "latency_assumption": "static, from distance-fit model (latency_bias_analysis.json)"
+}
