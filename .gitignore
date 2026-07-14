@@ -25,3 +25,8 @@ Thumbs.db
 *_unpacked/
 *_check/
 .claude/
+
+# Electricity Maps historical data: licensed for internal accounting use
+# only, not public redistribution. Regenerate locally via
+# carbon_scheduler/scripts/download_ci_history.py with your own API key.
+carbon_scheduler/data/history/ci_history_*.json
