@@ -30,3 +30,16 @@ Thumbs.db
 # only, not public redistribution. Regenerate locally via
 # carbon_scheduler/scripts/download_ci_history.py with your own API key.
 carbon_scheduler/data/history/ci_history_*.json
+
+# Paper drafts and internal project reports/notes: kept locally, not
+# published to this public code repo.
+/*.docx
+/*.pdf
+/*.tex
+/PAPER.md
+/PAPER.txt
+/PROJECT_*.md
+/HANDOFF.md
+/council-report-*.html
+/council-transcript-*.md
+/references.bib
