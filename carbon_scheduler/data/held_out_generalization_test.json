@@ -1,0 +1,43 @@
+{
+  "train_period": "2021-01-01 to 2023-12-31 (region choice only)",
+  "test_period": "2024-01-01 to 2025-12-31 (held out, never used for region choice)",
+  "static_lookup_region_from_train": "eu-north-1 (Sweden)",
+  "n_decisions_test": 2924,
+  "winner_distribution": {
+    "ca-central-1 (Canada)": 179,
+    "eu-north-1 (Sweden)": 2741,
+    "us-west-2 (Oregon)": 4
+  },
+  "scheduler_mean_ci": 20.984876880984952,
+  "static_lookup_mean_ci": 21.575218878248975,
+  "fixed_baseline_mean_ci": 405.0427393980848,
+  "scheduler_vs_static_pct": 2.7362039782556984,
+  "scheduler_vs_fixed_pct": 94.81909565588818,
+  "paired_t_test": {
+    "t_stat": 10.185801068899922,
+    "p_value": 5.739380241653846e-24
+  },
+  "wilcoxon": {
+    "w_stat": 0.0,
+    "p_value": 8.806209782033556e-32
+  },
+  "agreement_count": 2741,
+  "switch_to_better_count": 183,
+  "switch_to_worse_count": 0,
+  "subgroup_breakdown": {
+    "n_agree": 2741,
+    "n_disagree": 183,
+    "mean_diff_agree_g": 0.0,
+    "mean_diff_disagree_g": 9.43256830601093,
+    "pct_of_pooled_advantage_from_disagreement": 100.0
+  },
+  "autocorrelation_adjustment": {
+    "lag1_autocorr_rho": 0.4108070208691266,
+    "n_naive": 2924,
+    "n_effective": 1221.1452349573256,
+    "se_naive_g": 0.057957346041883726,
+    "se_adjusted_g": 0.08968369949329451,
+    "t_stat_adjusted": 6.582489355361179,
+    "p_value_adjusted": 4.626365956994505e-11
+  }
+}

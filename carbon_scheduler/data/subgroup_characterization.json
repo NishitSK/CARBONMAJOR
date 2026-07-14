@@ -1,0 +1,50 @@
+{
+  "n_total": 2924,
+  "n_agree": 2741,
+  "n_disagree": 183,
+  "artifact_check": {
+    "canada_estimated_rate_disagreement": 0.0,
+    "canada_estimated_rate_agreement": 0.0036483035388544327,
+    "sweden_estimated_rate_disagreement": 0.0,
+    "sweden_estimated_rate_agreement": 0.001459321415541773,
+    "artifact_flag": false
+  },
+  "seasonal_characterization": {
+    "fit_top_months": [
+      1,
+      4,
+      3,
+      6
+    ],
+    "fit_month_disagreement_counts": {
+      "1": 41,
+      "2": 9,
+      "3": 16,
+      "4": 25,
+      "5": 12,
+      "6": 15,
+      "7": 11,
+      "8": 5,
+      "9": 0,
+      "10": 0,
+      "11": 1,
+      "12": 2
+    },
+    "test_rate_in_fit_months": 0.05327868852459016,
+    "test_rate_out_fit_months": 0.0205761316872428,
+    "n_test_in_months": 488,
+    "n_test_out_months": 972,
+    "seasonal_signal_replicates": true
+  },
+  "disagreement_subgroup_autocorrelation": {
+    "n": 183,
+    "mean_advantage_g": 9.43256830601093,
+    "rho": 0.31648269416841424,
+    "n_effective": 95.0135292482459,
+    "t_naive": 14.845361354421241,
+    "p_naive": 0.0,
+    "t_adjusted": 10.696900436015865,
+    "p_adjusted": 0.0,
+    "small_neff_warning": false
+  }
+}
