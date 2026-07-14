@@ -1,0 +1,59 @@
+{
+  "note": "SYNTHETIC mechanism test with a perturbed CI feed and a local mock state store, not a second live AWS run. Complements, does not replace, the single real migration in the live pilot.",
+  "n_cycles": 7,
+  "n_migrations": 5,
+  "final_counter": 5,
+  "all_continuity_confirmed": true,
+  "cycles": [
+    {
+      "active_before": "us-east-1",
+      "winner": "eu-north-1",
+      "migrated": true,
+      "write_ok": true,
+      "counter_after": 1,
+      "continuity_confirmed": true
+    },
+    {
+      "active_before": "eu-north-1",
+      "winner": "eu-north-1",
+      "migrated": false
+    },
+    {
+      "active_before": "eu-north-1",
+      "winner": "ca-central-1",
+      "migrated": true,
+      "write_ok": true,
+      "counter_after": 2,
+      "continuity_confirmed": true
+    },
+    {
+      "active_before": "ca-central-1",
+      "winner": "ca-central-1",
+      "migrated": false
+    },
+    {
+      "active_before": "ca-central-1",
+      "winner": "eu-north-1",
+      "migrated": true,
+      "write_ok": true,
+      "counter_after": 3,
+      "continuity_confirmed": true
+    },
+    {
+      "active_before": "eu-north-1",
+      "winner": "us-east-1",
+      "migrated": true,
+      "write_ok": true,
+      "counter_after": 4,
+      "continuity_confirmed": true
+    },
+    {
+      "active_before": "us-east-1",
+      "winner": "eu-north-1",
+      "migrated": true,
+      "write_ok": true,
+      "counter_after": 5,
+      "continuity_confirmed": true
+    }
+  ]
+}
