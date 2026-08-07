@@ -192,12 +192,14 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 .left-panel {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  min-width: 0;
 }
 
 @media (max-width: 980px) {

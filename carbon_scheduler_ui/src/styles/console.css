@@ -1,0 +1,58 @@
+/* Client Console (/console) -- bring-your-own-fleet demo. */
+
+.fleet-add-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
+.fleet-input, .fleet-select {
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.7rem;
+  font-size: 0.82rem;
+}
+.fleet-input { flex: 1; min-width: 160px; }
+.fleet-select { min-width: 200px; }
+
+.fleet-list { display: flex; flex-direction: column; gap: 6px; }
+.fleet-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.fleet-row-label { flex: 1; display: flex; flex-direction: column; min-width: 0; gap: 2px; }
+.fleet-row-name { font-weight: 600; font-size: 0.88rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.fleet-row-zone { font-size: 0.7rem; color: var(--text-faint); }
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.icon-btn:hover { color: var(--accent); border-color: var(--accent-line); }
+.icon-btn-danger:hover { color: #ff6b6b; border-color: rgba(255, 107, 107, 0.4); }
+
+.switching-mode-toggle { margin: 0; }
+
+.recommendation-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 1.25rem;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+}
+
+.active-server-panel { margin: 0 0 1.25rem; padding: 1.1rem 1.25rem; }

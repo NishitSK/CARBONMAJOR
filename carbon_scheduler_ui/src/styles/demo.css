@@ -1,0 +1,46 @@
+/* Styles for the /playground sandbox (formerly an inline <style> block in
+   App.jsx) and the shared demo components (map, controls, table). */
+
+.savings-counter { display: flex; align-items: center; gap: 8px; padding: 0.5rem 0.9rem; }
+.savings-value { font-size: 0.8rem; font-weight: 600; color: var(--spectrum-clean); white-space: nowrap; }
+.export-btn { display: flex; align-items: center; gap: 6px; background: var(--surface-raised); border: 1px solid var(--line); color: var(--text-dim); font-size: 0.72rem; font-weight: 600; padding: 0.45rem 0.8rem; border-radius: var(--radius-sm); cursor: pointer; }
+.export-btn:hover:not(:disabled) { color: var(--accent); border-color: var(--accent-line); }
+.export-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+.header-sep { width: 1px; background: var(--line); margin: 0 2px; }
+.toggle-group { display: flex; gap: 2px; background: var(--bg-deep); padding: 2px; border-radius: 6px; }
+.toggle-btn { background: transparent; border: none; font-size: 0.62rem; letter-spacing: 0.03em; padding: 5px 9px; border-radius: 4px; color: var(--text-faint); font-weight: 700; display: flex; align-items: center; gap: 4px; transition: all 0.15s; }
+.toggle-btn.on { background: var(--accent-dim); color: var(--accent); }
+.ghost-btn { display: flex; gap: 6px; align-items: center; background: transparent; border: 1px solid var(--line); color: var(--text-dim); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 10px; }
+.ghost-btn-on { background: var(--accent-dim); border-color: var(--accent-line); color: var(--accent); }
+.live-btn { border-color: rgba(61, 220, 132, 0.3); color: var(--spectrum-clean); }
+.live-btn-on { background: rgba(61, 220, 132, 0.14); border-color: var(--spectrum-clean); color: var(--spectrum-clean); }
+.day-sim-btn { border-color: rgba(94, 230, 200, 0.3); }
+.day-sim-btn-on { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.daysim-console { display: flex; align-items: center; gap: 0.9rem; padding: 0.6rem 1rem; margin-bottom: 0.9rem; }
+.daysim-playbtn { background: var(--accent); color: #06291F; border: none; border-radius: 50%; width: 30px; height: 30px; min-width: 30px; display: flex; align-items: center; justify-content: center; padding: 0; }
+.daysim-clock { font-size: 1rem; font-weight: 700; color: var(--text); min-width: 48px; }
+.daysim-scrub { flex: 1; margin: 0; }
+.daysim-label { font-size: 0.74rem; color: var(--text-faint); white-space: nowrap; }
+@media (max-width: 640px) { .daysim-label { display: none; } }
+.rejected-list-section { margin-top: 1.5rem; }
+.rejected-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.rejected-card-small { padding: 0.8rem; display: flex; flex-direction: column; gap: 2px; }
+.explainability-panel { margin: 0; padding: 1.4rem; }
+.explanation-metric { display: flex; flex-direction: column; }
+.explanation-metric .label { font-size: 0.66rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.explanation-metric .value { font-size: 0.9rem; color: var(--text); font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+.results-table { width: 100%; border-collapse: collapse; }
+.rank-1 { background: var(--accent-dim); }
+.score-cell { font-family: 'IBM Plex Mono', monospace; font-weight: 700; color: var(--accent); }
+.mini-badge { padding: 2px 7px; border-radius: 4px; }
+.weight-display { margin-bottom: 1.1rem; background: var(--bg-deep); padding: 5px 9px; border-radius: var(--radius-sm); display: inline-block; font-size: 0.72rem; color: var(--text-dim); }
+.info-panel { margin-top: 1.25rem; padding: 0.75rem; background: var(--bg-deep); border-radius: var(--radius-sm); display: flex; gap: 8px; align-items: flex-start; }
+.info-panel p { margin: 0; font-size: 0.74rem; color: var(--text-dim); line-height: 1.45; }
+.divider { border: none; border-top: 1px solid var(--line); margin: 1.25rem 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .pulse { animation: pulse-anim 2.2s ease-in-out infinite; }
+}
+@keyframes pulse-anim {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
