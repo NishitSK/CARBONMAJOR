@@ -16,6 +16,8 @@ from services import forecaster
 from services import lstm_forecaster
 from services.electricity_service import ElectricityService
 import config
+from research_api import router as research_router
+from history_api import router as history_router
 
 app = FastAPI(title="Carbon-Aware Scheduler API")
 
@@ -75,6 +77,19 @@ async def get_regions(mode: str = "fixed", demo_mode: bool = False):
     sim = get_simulator(demo_mode)
     regions = sim.get_simulation_data(mode)
     return [r.to_dict() for r in regions]
+
+@router.get("/zones")
+async def get_zones():
+    """
+    Pure metadata (name/lat/lng) for every real electricity zone this
+    system can pull carbon data for -- no carbon/latency fetch. Powers the
+    Client Console's "add a server" zone picker: a client picks which real
+    zone their own server lives in, carbon data for it stays real.
+    """
+    return [
+        {"name": name, "lat": meta["lat"], "lng": meta["lng"]}
+        for name, meta in ElectricityService.REGION_MAP.items()
+    ]
 
 @router.get("/daily-series")
 async def get_daily_series(mode: str = "fixed"):
@@ -234,8 +249,10 @@ async def schedule_joint(request: ScheduleJointRequest):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-# Include router
+# Include routers
 app.include_router(router)
+app.include_router(research_router)
+app.include_router(history_router)
 
 if __name__ == "__main__":
     import uvicorn
