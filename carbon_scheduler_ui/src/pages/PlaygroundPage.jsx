@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Leaf, AlertTriangle, CheckCircle, RefreshCw, Globe, Activity, Play, Pause,
-  Lock, Unlock, Shield, Clock, ArrowLeft
+  Lock, Unlock, Shield, Clock, ArrowLeft, FlaskConical
 } from 'lucide-react';
 import WorldMap from '../components/demo/WorldMap';
 import { SpectrumDivider } from '../components/demo/SpectrumBar';
@@ -24,6 +24,16 @@ export default function PlaygroundPage() {
   return (
     <div className="dashboard-container">
       <header>
+        <div className="glass-panel info-panel" style={{ margin: '0 0 1.25rem 0', borderLeft: '3px solid var(--accent)' }}>
+          <FlaskConical size={16} color="var(--accent)" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <p>
+            <strong style={{ color: 'var(--text)' }}>Scoring-engine sandbox, not a data source.</strong>{' '}
+            &ldquo;Demo Mode&rdquo;, &ldquo;Random drift&rdquo;, and &ldquo;Day simulation&rdquo; below use synthetic
+            carbon-intensity values to exercise the scheduler's logic, not real grid readings. For real
+            2021&ndash;2025 historical data, see <Link to="/" style={{ color: 'var(--accent)' }}>Historical Replay</Link> on
+            the homepage or the <Link to="/console" style={{ color: 'var(--accent)' }}>Console</Link>. Only &ldquo;Live maps&rdquo; mode below uses real, live carbon data.
+          </p>
+        </div>
         <div className="console-header">
           <div>
             <Link to="/" className="ghost-btn" style={{ marginBottom: '0.9rem', display: 'inline-flex' }}>
@@ -49,9 +59,9 @@ export default function PlaygroundPage() {
 
             <div className="glass-panel header-controls" style={{ display: 'flex', gap: '0.6rem', padding: '0.4rem 0.6rem' }}>
               <div className="toggle-group">
-                <button onClick={() => s.setDemoMode(!s.demoMode)} className={`toggle-btn ${s.demoMode ? 'on' : ''}`}>
+                <button onClick={() => s.setDemoMode(!s.demoMode)} className={`toggle-btn ${s.demoMode ? 'on' : ''}`} title="Locks the sandbox to a fixed synthetic scenario (seed 42) instead of drifting/live values">
                   {s.demoMode ? <Lock size={13} /> : <Unlock size={13} />}
-                  DEMO {s.demoMode ? 'ON' : 'OFF'}
+                  SYNTHETIC {s.demoMode ? 'LOCKED' : 'OFF'}
                 </button>
                 <button onClick={() => s.setDebugMode(!s.debugMode)} className={`toggle-btn ${s.debugMode ? 'on' : ''}`}>
                   {s.debugMode ? <Activity size={13} /> : <RefreshCw size={13} />}

@@ -23,7 +23,7 @@ import ProgramBoxesSection from '../sections/console/ProgramBoxesSection';
 
 export default function ConsolePage() {
   const fleet = useClientFleet();
-  const { zones, loading: zonesLoading } = useZones();
+  const { zones, loading: zonesLoading, error: zonesError } = useZones();
   const clock = useConsoleClock(
     fleet.servers, fleet.weights, fleet.maxLatency,
     fleet.switchingMode, fleet.activeServerId, fleet.setActiveServerId,
@@ -83,6 +83,12 @@ export default function ConsolePage() {
         <div className="glass-panel status-fail" style={{ textAlign: 'center', margin: '0 0 1.25rem' }}>
           <AlertTriangle style={{ verticalAlign: 'middle', marginRight: '8px' }} />
           {clock.error} (Check port 8001)
+        </div>
+      )}
+      {zonesError && (
+        <div className="glass-panel status-fail" style={{ textAlign: 'center', margin: '0 0 1.25rem' }}>
+          <AlertTriangle style={{ verticalAlign: 'middle', marginRight: '8px' }} />
+          {zonesError}
         </div>
       )}
 
