@@ -19,12 +19,15 @@ import '../styles/console.css';
 // and controls whether carbon-aware failover applies itself or waits for
 // their approval. Fleet + settings persist to localStorage only -- no
 // login/backend account system, this is a demo.
+import ProgramBoxesSection from '../sections/console/ProgramBoxesSection';
+
 export default function ConsolePage() {
   const fleet = useClientFleet();
   const { zones, loading: zonesLoading } = useZones();
   const clock = useConsoleClock(
     fleet.servers, fleet.weights, fleet.maxLatency,
-    fleet.switchingMode, fleet.activeServerId, fleet.setActiveServerId
+    fleet.switchingMode, fleet.activeServerId, fleet.setActiveServerId,
+    fleet.workloads, fleet.setWorkloadActiveServer, fleet.programs
   );
 
   const handleWeightChange = (key, value) => {
@@ -33,7 +36,6 @@ export default function ConsolePage() {
 
   const serverById = Object.fromEntries(fleet.servers.map(sv => [sv.id, sv]));
   const activeServer = serverById[fleet.activeServerId] || null;
-  const recommendedServer = serverById[clock.recommendedServerId] || null;
 
   const labelOf = (id) => serverById[id]?.label || id;
   const displayResults = (clock.scoreResult?.eligible || []).map(res => ({
@@ -59,8 +61,7 @@ export default function ConsolePage() {
               <h1>Your Console</h1>
             </div>
             <p className="console-sub">
-              Register the servers you already run, pick real vs. manual switching, and let the
-              scheduler manage carbon-aware failover across your own fleet.
+              Create Project Boxes bound to specific Geographic Region Scopes (Europe, South Asia, South East Asia, East Asia, World, etc.) and manage carbon-aware failover for workloads within those regions.
             </p>
           </div>
         </div>
@@ -91,6 +92,8 @@ export default function ConsolePage() {
             servers={fleet.servers}
             zones={zones}
             zonesLoading={zonesLoading}
+            activeServerId={fleet.activeServerId}
+            onSelectActive={fleet.setActiveServerId}
             onAdd={fleet.addServer}
             onRemove={fleet.removeServer}
             onRename={fleet.renameServer}
@@ -98,14 +101,33 @@ export default function ConsolePage() {
 
           {fleet.servers.length > 0 && (
             <>
-              <ActiveServerPanel
-                activeServer={activeServer}
-                recommendedServer={recommendedServer}
-                switchingMode={fleet.switchingMode}
-                onApply={clock.applyRecommendation}
+              <ProgramBoxesSection
+                programs={fleet.programs || []}
+                workloads={fleet.workloads || []}
+                servers={fleet.servers}
+                zones={zones}
+                workloadResults={clock.workloadResults}
+                zoneCarbon={clock.zoneCarbon}
+                onAddProgram={fleet.addProgram}
+                onRemoveProgram={fleet.removeProgram}
+                onUpdateProgram={fleet.updateProgram}
+                onAddWorkloadToProgram={fleet.addWorkloadToProgram}
+                onRemoveWorkload={fleet.removeWorkload}
+                onUpdateWorkload={fleet.updateWorkload}
+                onSelectActiveServer={fleet.setWorkloadActiveServer}
+                onSwitchRegion={fleet.switchWorkloadRegion}
+                onSetSwitchingMode={fleet.setWorkloadSwitchingMode}
               />
               <RejectedRegionsPanel rejected={displayRejected} />
-              <RegionRankingsTable results={displayResults} debugMode={false} onExportCsv={() => {}} />
+              <RegionRankingsTable
+                results={displayResults}
+                debugMode={false}
+                onExportCsv={() => {}}
+                onSelectRegion={(serverLabelOrId) => {
+                  const sv = fleet.servers.find(s => s.label === serverLabelOrId || s.id === serverLabelOrId);
+                  if (sv) fleet.setActiveServerId(sv.id);
+                }}
+              />
             </>
           )}
         </div>

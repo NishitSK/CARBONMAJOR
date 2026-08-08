@@ -2,7 +2,7 @@ import React from 'react';
 import { TrendingDown, Download } from 'lucide-react';
 import { SpectrumTick } from './SpectrumBar';
 
-export default function RegionRankingsTable({ results, debugMode, onExportCsv }) {
+export default function RegionRankingsTable({ results, debugMode, onExportCsv, onSelectRegion }) {
   return (
     <section>
       <div className="panel-title" style={{ marginBottom: '1rem', justifyContent: 'space-between', display: 'flex' }}>
@@ -29,6 +29,7 @@ export default function RegionRankingsTable({ results, debugMode, onExportCsv })
               )}
               <th>Score</th>
               <th>Strengths</th>
+              {onSelectRegion && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
@@ -57,6 +58,17 @@ export default function RegionRankingsTable({ results, debugMode, onExportCsv })
                     ))}
                   </div>
                 </td>
+                {onSelectRegion && (
+                  <td>
+                    <button
+                      className="ghost-btn"
+                      style={{ padding: '2px 8px', fontSize: '0.72rem' }}
+                      onClick={() => onSelectRegion(res?.region?.name)}
+                    >
+                      Switch
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

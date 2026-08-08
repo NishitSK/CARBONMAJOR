@@ -4,7 +4,7 @@ import { Server, Plus, Trash2, Pencil, Check, X } from 'lucide-react';
 // Add/remove/rename rows for the client's own server fleet. Each server is
 // a { label, zoneName } pair -- the zone picker only offers real electricity
 // zones (from GET /regions/zones) so carbon data for it stays real.
-export default function ServerFleetManager({ servers, zones, zonesLoading, onAdd, onRemove, onRename }) {
+export default function ServerFleetManager({ servers, zones, zonesLoading, activeServerId, onSelectActive, onAdd, onRemove, onRename }) {
   const [label, setLabel] = useState('');
   const [zoneName, setZoneName] = useState('');
   const [editingId, setEditingId] = useState(null);
@@ -65,7 +65,7 @@ export default function ServerFleetManager({ servers, zones, zonesLoading, onAdd
       ) : (
         <div className="fleet-list">
           {servers.map(sv => (
-            <div key={sv.id} className="fleet-row">
+            <div key={sv.id} className="fleet-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               {editingId === sv.id ? (
                 <>
                   <input
@@ -84,8 +84,15 @@ export default function ServerFleetManager({ servers, zones, zonesLoading, onAdd
                     <span className="fleet-row-name">{sv.label}</span>
                     <span className="fleet-row-zone mono">{sv.zoneName}</span>
                   </div>
-                  <button className="icon-btn" onClick={() => startEdit(sv)} title="Rename"><Pencil size={13} /></button>
-                  <button className="icon-btn icon-btn-danger" onClick={() => onRemove(sv.id)} title="Remove"><Trash2 size={13} /></button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {sv.id === activeServerId ? (
+                      <span className="mini-badge" style={{ background: 'rgba(94, 230, 200, 0.15)', color: 'var(--accent)', border: '1px solid var(--accent)' }}>Active</span>
+                    ) : (
+                      <button className="ghost-btn" style={{ padding: '2px 8px', fontSize: '0.72rem' }} onClick={() => onSelectActive(sv.id)}>Switch to</button>
+                    )}
+                    <button className="icon-btn" onClick={() => startEdit(sv)} title="Rename"><Pencil size={13} /></button>
+                    <button className="icon-btn icon-btn-danger" onClick={() => onRemove(sv.id)} title="Remove"><Trash2 size={13} /></button>
+                  </div>
                 </>
               )}
             </div>
