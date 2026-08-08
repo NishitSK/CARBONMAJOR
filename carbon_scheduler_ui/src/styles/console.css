@@ -1,5 +1,31 @@
 /* Client Console (/console) -- bring-your-own-fleet demo. */
 
+.console-empty-explainer { margin-top: 1.25rem; }
+
+.console-explainer-steps { display: flex; flex-direction: column; gap: 1.1rem; }
+
+.console-explainer-step {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.console-explainer-step svg { flex-shrink: 0; margin-top: 2px; }
+
+.console-explainer-step strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.console-explainer-step p {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+  margin: 0;
+}
+
 .fleet-add-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem; }
 .fleet-input, .fleet-select {
   background: var(--bg-deep);

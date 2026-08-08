@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Shield, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, Shield, AlertTriangle, Server, FolderKanban, Wand2, History } from 'lucide-react';
 import { useClientFleet } from '../hooks/useClientFleet';
 import { useZones } from '../hooks/useZones';
 import { useConsoleClock } from '../hooks/useConsoleClock';
@@ -104,6 +104,44 @@ export default function ConsolePage() {
             onRemove={fleet.removeServer}
             onRename={fleet.renameServer}
           />
+
+          {fleet.servers.length === 0 && (
+            <section className="glass-panel console-empty-explainer">
+              <div className="panel-title" style={{ marginBottom: '1.1rem' }}>
+                How this console works
+              </div>
+              <div className="console-explainer-steps">
+                <div className="console-explainer-step">
+                  <Server size={18} color="var(--accent)" />
+                  <div>
+                    <strong>Register your servers</strong>
+                    <p>Give each one a label and pick the real electricity zone it lives in -- carbon data stays real, only which zones you own is up to you.</p>
+                  </div>
+                </div>
+                <div className="console-explainer-step">
+                  <FolderKanban size={18} color="var(--accent)" />
+                  <div>
+                    <strong>Group them into project boxes</strong>
+                    <p>Each project can be locked to a geographic scope (Europe, South Asia, etc.) so its workloads never get recommended a region outside that boundary.</p>
+                  </div>
+                </div>
+                <div className="console-explainer-step">
+                  <Wand2 size={18} color="var(--accent)" />
+                  <div>
+                    <strong>Choose manual or automatic switching</strong>
+                    <p>Manual surfaces a recommendation and waits for you to approve it. Auto applies the lowest-carbon eligible region on its own, every hour.</p>
+                  </div>
+                </div>
+                <div className="console-explainer-step">
+                  <History size={18} color="var(--accent)" />
+                  <div>
+                    <strong>Play the real historical clock</strong>
+                    <p>Once you've added a server, a time scrubber appears above driving real 2021&ndash;2025 hourly carbon data through your fleet -- nothing here is simulated.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           {fleet.servers.length > 0 && (
             <>
