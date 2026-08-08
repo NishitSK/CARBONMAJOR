@@ -31,6 +31,13 @@ Thumbs.db
 # carbon_scheduler/scripts/download_ci_history.py with your own API key.
 carbon_scheduler/data/history/ci_history_*.json
 
+# Same licensing restriction as above, for the raw yearly CSV snapshots
+# import_yearly_csv.py was built from.
+carbon_scheduler/data/raw_yearly/
+
+# Frontend build output: generated via `npm run build`, not source.
+carbon_scheduler_ui/dist/
+
 # Paper drafts and internal project reports/notes: kept locally, not
 # published to this public code repo.
 /*.docx
