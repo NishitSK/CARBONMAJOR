@@ -87,7 +87,7 @@ export default function ActiveServerPanel({
           <>
             <div style={{ fontSize: '1.15rem', fontWeight: 700, fontFamily: "'Space Grotesk', sans-serif" }}>{activeServer.label}</div>
             <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)', marginTop: '2px' }}>
-              Current region: <strong style={{ color: 'var(--text-bright)' }}>{activeServer.zoneName}</strong>
+              Current region: <strong style={{ color: 'var(--text)' }}>{activeServer.zoneName}</strong>
             </div>
           </>
         ) : (
