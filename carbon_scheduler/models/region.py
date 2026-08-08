@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class Region:
@@ -19,6 +20,7 @@ class Region:
     resources: float
     lat: float = 0.0
     lng: float = 0.0
+    zoneName: Optional[str] = None
 
     def __post_init__(self):
         """Ensure types are correct after initialization."""

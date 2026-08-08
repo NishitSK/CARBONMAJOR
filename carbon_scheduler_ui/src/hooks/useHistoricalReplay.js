@@ -8,6 +8,7 @@ const PLAY_INTERVAL_MS = 400;
 const DEFAULT_START_ISO = '2021-01-04T12:00:00.000000';
 
 function isoAtHour(rangeStartIso, hourOffset) {
+  if (!rangeStartIso) return '';
   const start = new Date(rangeStartIso.slice(0, 19) + 'Z');
   const d = new Date(start.getTime() + hourOffset * 3600 * 1000);
   const pad = (n) => String(n).padStart(2, '0');
@@ -15,6 +16,7 @@ function isoAtHour(rangeStartIso, hourOffset) {
 }
 
 function hourOffsetOf(rangeStartIso, targetIso) {
+  if (!rangeStartIso || !targetIso) return 0;
   const start = new Date(rangeStartIso.slice(0, 19) + 'Z').getTime();
   const target = new Date(targetIso.slice(0, 19) + 'Z').getTime();
   return Math.round((target - start) / 3600000);
