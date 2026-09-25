@@ -2,31 +2,31 @@
     {
         "name": "us-east-1 (N. Virginia)",
         "carbon": 380,
-        "latency": 120,
+        "latency": 230.2,
         "resources": 80
     },
     {
         "name": "eu-west-1 (Ireland)",
         "carbon": 230,
-        "latency": 85,
+        "latency": 151.0,
         "resources": 95
     },
     {
         "name": "ap-south-1 (Mumbai)",
         "carbon": 710,
-        "latency": 190,
+        "latency": 26.8,
         "resources": 65
     },
     {
         "name": "sa-east-1 (Sao Paulo)",
         "carbon": 140,
-        "latency": 280,
+        "latency": 345.4,
         "resources": 55
     },
     {
         "name": "ca-central-1 (Canada)",
         "carbon": 120,
-        "latency": 145,
+        "latency": 234.8,
         "resources": 88
     },
     {
@@ -38,31 +38,31 @@
     {
         "name": "eu-central-1 (Frankfurt)",
         "carbon": 350,
-        "latency": 95,
+        "latency": 150.2,
         "resources": 78
     },
     {
         "name": "us-west-2 (Oregon)",
         "carbon": 160,
-        "latency": 110,
+        "latency": 313.6,
         "resources": 82
     },
     {
         "name": "ap-southeast-2 (Sydney)",
         "carbon": 580,
-        "latency": 210,
+        "latency": 361.2,
         "resources": 70
     },
     {
         "name": "eu-north-1 (Sweden)",
         "carbon": 40,
-        "latency": 130,
+        "latency": 179.2,
         "resources": 90
     },
     {
         "name": "ap-southeast-1 (Singapore)",
         "carbon": 450,
-        "latency": 175,
+        "latency": 83,
         "resources": 75
     },
     {
@@ -74,7 +74,7 @@
     {
         "name": "us-east-2 (Ohio)",
         "carbon": 420,
-        "latency": 100,
+        "latency": 232.6,
         "resources": 85
     }
 ]

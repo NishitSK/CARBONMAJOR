@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List, Dict, Optional
 import sys
 import os
+import json
 
 # Add parent directory to path to import current logic
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -15,6 +16,8 @@ from services.scheduler import Scheduler, build_joint_region_pool
 from services import forecaster
 from services import lstm_forecaster
 from services.electricity_service import ElectricityService
+from services.failsafe_engine import failsafe_engine
+from services import forecast_calibration
 import config
 from research_api import router as research_router
 from history_api import router as history_router
@@ -24,8 +27,13 @@ app = FastAPI(title="Carbon-Aware Scheduler API")
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    # Local dev UI origins only (vite dev + vite preview); the /api proxy
+    # path doesn't need CORS at all.
+    allow_origins=[
+        "http://localhost:5173", "http://127.0.0.1:5173",
+        "http://localhost:4173", "http://127.0.0.1:4173",
+    ],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -246,8 +254,217 @@ async def schedule_joint(request: ScheduleJointRequest):
         )
         region_pool = build_joint_region_pool()
         return scheduler.schedule(workload, region_pool)
-    except ValueError as e:
+    except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/pilot/telemetry")
+async def get_pilot_telemetry():
+    """Returns the latest pilot telemetry and instance fleet metadata across accounts."""
+    import math
+    data_dir = config.DATA_DIR
+
+    def _finite(obj):
+        # Pilot logs can contain NaN/Infinity (accepted by Python's json, not
+        # valid in a JSON response); map them to null so the response serializes.
+        if isinstance(obj, float) and not math.isfinite(obj):
+            return None
+        if isinstance(obj, dict):
+            return {k: _finite(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [_finite(v) for v in obj]
+        return obj
+
+    def read_last_lines(filename, n=15):
+        filepath = os.path.join(data_dir, filename)
+        if not os.path.exists(filepath):
+            return []
+        lines = []
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                for line in f:
+                    if line.strip():
+                        try:
+                            lines.append(_finite(json.loads(line.strip())))
+                        except Exception:
+                            pass
+            return lines[-n:]
+        except Exception:
+            return []
+
+    arima_instances = {}
+    lstm_instances = {}
+    adaptive_instances = {}
+    
+    try:
+        p_adaptive = os.path.join(data_dir, "pilot_instances_adaptive.json")
+        if os.path.exists(p_adaptive):
+            with open(p_adaptive, "r") as f:
+                adaptive_instances = json.load(f)
+    except Exception:
+        pass
+
+    try:
+        p_arima = os.path.join(data_dir, "pilot_instances_arima.json")
+        if os.path.exists(p_arima):
+            with open(p_arima, "r") as f:
+                arima_instances = json.load(f)
+    except Exception:
+        pass
+
+    try:
+        p_lstm = os.path.join(data_dir, "pilot_instances_lstm.json")
+        if os.path.exists(p_lstm):
+            with open(p_lstm, "r") as f:
+                lstm_instances = json.load(f)
+    except Exception:
+        pass
+
+    # Instance metadata (instance IDs, public IPs) is used only for a count
+    # and never returned to the client.
+    return {
+        "adaptive_logs": read_last_lines("pilot_adaptive.jsonl", 15),
+        "arima_logs": read_last_lines("pilot_arima.jsonl", 15),
+        "lstm_logs": read_last_lines("pilot_lstm.jsonl", 15),
+        "active_regions_count": len(adaptive_instances) or len(arima_instances) or len(lstm_instances) or 12
+    }
+
+
+@app.get("/forecasting/multi-stage")
+async def get_multi_stage_forecasting(region_name: Optional[str] = None):
+    """
+    Returns 3-stage lookahead (3h, 6h, 12h) comparison across all regions or a specific region.
+    """
+    try:
+        from services.real_temporal_forecaster import forecast_lstm_forward
+        from services.forecaster import forecast_next_hours
+        import datetime
+
+        now_dt = datetime.datetime.now(datetime.timezone.utc)
+        hour_of_day = now_dt.hour
+        window_start_hour = (hour_of_day - (lstm_forecaster.WINDOW_HOURS - 1)) % 24
+
+        results = {}
+        for app_name, meta in ElectricityService.REGION_MAP.items():
+            if region_name and app_name.lower() != region_name.lower() and meta["zone"].lower() != region_name.lower():
+                continue
+
+            zone_code = meta["zone"]
+            hist_file = os.path.join(config.DATA_DIR, "history", f"ci_history_{zone_code}.json")
+            trailing = [200.0] * 24
+            if os.path.exists(hist_file):
+                try:
+                    with open(hist_file, "r") as f:
+                        h_data = json.load(f)
+                        trailing = [float(p.get("carbonIntensity", 200.0)) for p in h_data[-24:]]
+                except Exception:
+                    pass
+
+            # Live CI
+            try:
+                live_ci = ElectricityService().get_carbon_intensity(zone_code)
+                if live_ci:
+                    trailing[-1] = float(live_ci)
+            except Exception:
+                pass
+
+            cur_ci = trailing[-1]
+
+            # ARIMA Forecast (12h)
+            try:
+                arima_preds = forecast_next_hours(trailing, n_hours=12)
+            except Exception:
+                arima_preds = [cur_ci] * 12
+
+            # LSTM Forecast (12h)
+            try:
+                bundle = lstm_forecaster.load_model(zone_code)
+                if bundle:
+                    lstm_preds, _ = forecast_lstm_forward(bundle, trailing, window_start_hour, 12)
+                else:
+                    lstm_preds = [cur_ci] * 12
+            except Exception:
+                lstm_preds = [cur_ci] * 12
+
+            # Compute multi-horizon summaries (1h, 3h, 6h, 12h)
+            # OFF-safe fallbacks, matching the live runners: if the calibration
+            # file is missing or malformed, ARIMA stays disabled and CarbonLSTM
+            # keeps its data-driven 15%.
+            guard_fallback = {"CarbonLSTM": 15.0, "ARIMA(2,1,2)": 1000.0}
+
+            def summarize_stages(preds, model_name):
+                # optimal_offset is HOURS AHEAD: 0 means run now. preds[i] is
+                # the forecast for T+(i+1)h. Every stage then passes through the
+                # same no-regret guard the live runners use, at that
+                # model+horizon's calibrated threshold, so this endpoint can
+                # never recommend a delay the guard itself would refuse.
+                def stage(n, horizon):
+                    window = preds[:n]
+                    best_i = min(range(len(window)), key=lambda i: window[i])
+                    best_ci = window[best_i]
+                    no_cleaner_hour = best_ci >= cur_ci
+                    raw_offset = 0 if no_cleaner_hour else best_i + 1
+                    raw_savings = round(max(0.0, (cur_ci - best_ci) / max(1.0, cur_ci) * 100), 1)
+
+                    threshold = forecast_calibration.applied_threshold(
+                        model_name, horizon, fallback=guard_fallback.get(model_name, 2.5))
+                    guarded_offset, guarded_ci, guard_reason = failsafe_engine.apply_no_regret_guard(
+                        current_ci=cur_ci,
+                        predicted_optimal_ci=best_ci,
+                        optimal_offset=raw_offset,
+                        min_saving_threshold_pct=threshold,
+                    )
+
+                    return {
+                        "optimal_offset": guarded_offset,
+                        "predicted_ci": guarded_ci,
+                        "savings_pct": round(max(0.0, (cur_ci - guarded_ci) / max(1.0, cur_ci) * 100), 1),
+                        "no_cleaner_hour": no_cleaner_hour,
+                        "guard_held": guarded_offset == 0 and raw_offset > 0,
+                        "guard_threshold_pct": threshold,
+                        "guard_reason": guard_reason,
+                        "model_proposed_offset": raw_offset,
+                        "model_proposed_ci": cur_ci if no_cleaner_hour else best_ci,
+                        "model_proposed_savings_pct": raw_savings,
+                        # The cleanest hour the model sees in this window, even
+                        # when it is dirtier than now -- this is what differs
+                        # between the 3h, 6h and 12h views.
+                        "best_future_offset": best_i + 1,
+                        "best_future_ci": best_ci,
+                        "best_future_change_pct": round((best_ci - cur_ci) / max(1.0, cur_ci) * 100, 1),
+                    }
+
+                return {"1h": stage(1, 1), "3h": stage(3, 3), "6h": stage(6, 6), "12h": stage(12, 12)}
+
+            results[app_name] = {
+                "zone": zone_code,
+                "current_ci": cur_ci,
+                "arima_forecast_12h": arima_preds,
+                "lstm_forecast_12h": lstm_preds,
+                "arima_stages": summarize_stages(arima_preds, "ARIMA(2,1,2)"),
+                "lstm_stages": summarize_stages(lstm_preds, "CarbonLSTM")
+            }
+
+        return results
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/forecasting/verification")
+async def get_forecast_verification():
+    """
+    Returns ground-truth verification summary metrics (MAE, RMSE, Directional Accuracy, Realized Savings)
+    for 1h, 3h, 6h horizons.
+    """
+    try:
+        from services import forecast_tracker
+        return {
+            "metrics": forecast_tracker.compute_verification_metrics(),
+            "pending_count": len(forecast_tracker.load_pending())
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # Include routers
 app.include_router(router)

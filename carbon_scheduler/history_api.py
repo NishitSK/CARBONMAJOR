@@ -68,7 +68,13 @@ async def get_history_range():
 async def get_history_at(timestamp: str):
     """Real per-region CI at one real historical hour, shaped like the
     existing GET /regions/ response (name/carbon/latency/resources/lat/lng)
-    so it can be posted straight to the existing /score endpoint."""
+    so it can be posted straight to the existing /score endpoint.
+
+    Disabled by default: this returns raw values from the licensed
+    Electricity Maps history, which must not be served. Set
+    CADSS_SERVE_LICENSED_HISTORY=1 only for private local research use."""
+    if os.environ.get("CADSS_SERVE_LICENSED_HISTORY") != "1":
+        raise HTTPException(status_code=403, detail="Raw historical carbon data is not served (licensed dataset)")
     series_by_zone, common_ts = _load()
     if timestamp not in common_ts:
         raise HTTPException(status_code=404, detail="No real data at that timestamp")

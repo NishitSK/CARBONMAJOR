@@ -1,387 +1,565 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
+/*
+  ONE enterprise token system (AWS Cloudscape x Salesforce Lightning blend).
+  Light is the default theme; dark is opt-in via [data-theme="dark"] on <html>.
+  A block of legacy aliases at the bottom maps the old, previously-UNDEFINED
+  vocabulary (--accent, --bg-deep, --line, --text-dim, --spectrum-clean, ...)
+  onto these role tokens, so components that referenced them render correctly
+  and on-theme without per-file edits. Migrate off the aliases, then delete.
+*/
 :root {
-  /* Surface */
-  --bg: #0A0E15;
-  --bg-deep: #060810;
-  --surface: #10151F;
-  --surface-raised: #151B27;
-  --line: #232B38;
-  --line-soft: #1A2030;
+  /* Neutral ramp (light) */
+  --gray-0: #ffffff;
+  --gray-50: #f8f9fa;
+  --gray-100: #f2f3f3;
+  --gray-200: #e9ebed;
+  --gray-300: #d5dbdb;
+  --gray-400: #b6bec9;
+  --gray-500: #879596;
+  --gray-600: #5f6b7a;
+  --gray-700: #414d5c;
+  --gray-800: #232f3e;
+  --gray-900: #16191f;
 
-  /* Text */
-  --text: #E7ECF2;
-  --text-dim: #8693A3;
-  --text-faint: #4D5868;
+  /* Surfaces & lines */
+  --bg: #f2f3f3;
+  --bg-subtle: #e9ebed;
+  --surface: #ffffff;
+  --surface-hover: #f4f6f7;
+  --surface-card: #ffffff;
+  --surface-raised: #ffffff;
+  --border: #d5dbdb;
+  --border-light: #e9ebed;
 
-  /* Interaction accent — reserved for UI state, never carbon meaning */
-  --accent: #5EE6C8;
-  --accent-dim: rgba(94, 230, 200, 0.14);
-  --accent-line: rgba(94, 230, 200, 0.4);
+  /* Typography */
+  --text-main: #16191f;
+  --text-muted: #5f6b7a;
+  --text-faint: #879596;
 
-  /* Carbon-intensity spectrum — calibrated to gCO2/kWh bands (200 / 450 / 700) */
-  --spectrum-clean: #3DDC84;
-  --spectrum-mid: #E8C547;
-  --spectrum-warm: #E8853D;
-  --spectrum-dirty: #E85D4A;
-  --spectrum-gradient: linear-gradient(
-    90deg,
-    var(--spectrum-clean) 0%,
-    var(--spectrum-clean) 18%,
-    var(--spectrum-mid) 42%,
-    var(--spectrum-warm) 68%,
-    var(--spectrum-dirty) 100%
-  );
+  /* Accent & Action (calm enterprise blue) */
+  --primary: #0b6bcb;
+  --primary-hover: #094f97;
+  --primary-subtle: rgba(11, 107, 203, 0.10);
 
-  --danger: #E85D4A;
-  --danger-dim: rgba(232, 93, 74, 0.12);
+  /* Status & Carbon Bands (muted, not neon) */
+  --clean: #037f51;
+  --clean-bg: rgba(3, 127, 81, 0.12);
+  --clean-border: rgba(3, 127, 81, 0.30);
 
-  --radius-sm: 4px;
+  --moderate: #b7791f;
+  --moderate-bg: rgba(183, 121, 31, 0.12);
+  --moderate-border: rgba(183, 121, 31, 0.30);
+
+  --dirty: #c0392b;
+  --dirty-bg: rgba(192, 57, 43, 0.12);
+  --dirty-border: rgba(192, 57, 43, 0.30);
+
+  --radius-sm: 6px;
   --radius-md: 8px;
+  --radius-lg: 12px;
 
-  font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.08);
+  --shadow-md: 0 2px 6px rgba(16, 24, 40, 0.10);
+
+  --map-land: #e4e8ee;
+  --map-line: #c3ccd6;
+
+  color-scheme: light;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+}
+
+/* Dark theme: refined slate (opt-in), same roles remapped. */
+:root[data-theme="dark"] {
+  --gray-0: #0b1119;
+  --gray-50: #101720;
+  --gray-100: #16202c;
+  --gray-200: #1f2a38;
+  --gray-300: #2a3745;
+  --gray-400: #35485a;
+  --gray-500: #6b7c8d;
+  --gray-600: #9fb0c0;
+  --gray-700: #c4d2de;
+  --gray-800: #e2e9f0;
+  --gray-900: #f4f7fa;
+
+  --bg: #0f1620;
+  --bg-subtle: #16202c;
+  --surface: #1a2430;
+  --surface-hover: #22303f;
+  --surface-card: #1a2430;
+  --surface-raised: #1f2a38;
+  --border: #2a3745;
+  --border-light: #35485a;
+
+  --text-main: #f2f6fa;
+  --text-muted: #9fb0c0;
+  --text-faint: #6b7c8d;
+
+  --primary: #4aa3ff;
+  --primary-hover: #6cb6ff;
+  --primary-subtle: rgba(74, 163, 255, 0.15);
+
+  --clean: #2ea77d;
+  --clean-bg: rgba(46, 167, 125, 0.15);
+  --clean-border: rgba(46, 167, 125, 0.35);
+
+  --moderate: #d9a441;
+  --moderate-bg: rgba(217, 164, 65, 0.15);
+  --moderate-border: rgba(217, 164, 65, 0.35);
+
+  --dirty: #e5675a;
+  --dirty-bg: rgba(229, 103, 90, 0.15);
+  --dirty-border: rgba(229, 103, 90, 0.35);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.45);
+
+  --map-land: rgba(255, 255, 255, 0.06);
+  --map-line: rgba(255, 255, 255, 0.14);
+
+  color-scheme: dark;
+}
+
+/*
+  Legacy alias layer -- maps the old undefined vocabulary onto role tokens.
+  Applies in BOTH themes (declared on :root, not overridden in dark) because
+  each alias points at a token that itself flips with the theme.
+*/
+:root {
+  --text: var(--text-main);
+  --text-dim: var(--text-muted);
+  --bg-deep: var(--bg-subtle);
+  --line: var(--border);
+  --accent: var(--primary);
+  --accent-hover: var(--primary-hover);
+  --accent-subtle: var(--primary-subtle);
+  --accent-dim: var(--primary-subtle);
+  --accent-line: var(--primary-subtle);
+  --spectrum-clean: var(--clean);
+  --spectrum-moderate: var(--moderate);
+  --spectrum-dirty: var(--dirty);
+  --danger: var(--dirty);
+  --danger-dim: var(--dirty-bg);
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
-}
-
-*:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
+  padding: 0;
 }
 
 body {
-  color: var(--text);
-  background: var(--bg);
-  background-image:
-    radial-gradient(circle at 15% 0%, rgba(94, 230, 200, 0.05), transparent 40%),
-    radial-gradient(circle at 85% 100%, rgba(232, 93, 74, 0.04), transparent 45%);
+  background-color: var(--bg);
+  color: var(--text-main);
   min-height: 100vh;
-  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
 }
 
 .mono {
-  font-family: 'IBM Plex Mono', monospace;
-  font-feature-settings: "tnum";
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 }
 
-/* ---------- Layout shell ---------- */
-
-.dashboard-container {
+/* Layout Shell */
+.app-layout {
   display: flex;
   flex-direction: column;
-  max-width: 1440px;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  /* min-width: 0 overrides the flex item default of min-width: auto, which
+     otherwise lets a wide descendant (e.g. the audit's workload table)
+     stretch this column-flex item past the viewport even though the table's
+     own .table-wrap already scrolls internally. */
+  min-width: 0;
+  max-width: 1480px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 2rem 3rem;
+  padding: 1.5rem 1rem 3rem;
 }
 
-.console-header {
+@media (min-width: 768px) {
+  .main-content { padding: 2.5rem 3rem 5rem; }
+}
+
+/* Navigation */
+.navbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1.75rem 0 1.25rem;
   flex-wrap: wrap;
+  row-gap: 0.6rem;
+  padding: 1.1rem 1.25rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
-.console-eyebrow {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin-bottom: 0.4rem;
+@media (min-width: 768px) {
+  .navbar { padding: 1.1rem 3rem; }
 }
 
-h1 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.9rem;
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.nav-logo-badge {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.06em;
+}
+
+.nav-title {
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--text);
 }
 
-.console-sub {
+.nav-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+  background: var(--surface-hover);
+}
+
+.nav-link.active {
+  color: var(--primary);
+  background: var(--primary-subtle);
+  border: 1px solid var(--primary);
+}
+
+.nav-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  background: var(--clean-bg);
+  color: var(--clean);
+  border: 1px solid var(--clean-border);
+  border-radius: 9999px;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--clean);
+}
+
+/* Page Header & Ribbons */
+.page-header {
+  margin-bottom: 2.5rem;
+}
+
+.page-title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+}
+
+.page-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.kpi-ribbon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kpi-label {
   font-size: 0.85rem;
-  color: var(--text-dim);
-  margin-top: 0.3rem;
-}
-
-/* Signature device: the calibrated carbon-intensity ruler */
-.spectrum-divider {
-  position: relative;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--spectrum-gradient);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
   margin-bottom: 0.5rem;
 }
 
-.spectrum-divider .spectrum-ticks {
+.kpi-val {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.1;
+}
+
+.kpi-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+}
+
+/* Cards & Containers */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 2rem 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+/* Tables */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.data-table th {
+  padding: 1rem 1.25rem;
+  background: var(--bg-subtle);
+  color: var(--text-faint);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+  padding: 1.15rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-main);
+  vertical-align: middle;
+  font-size: 0.975rem;
+}
+
+.data-table tr:hover td {
+  background: var(--surface-hover);
+}
+
+/* Carbon Badges */
+.badge-clean {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: var(--clean-bg);
+  color: var(--clean);
+  border: 1px solid var(--clean-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.badge-moderate {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: var(--moderate-bg);
+  color: var(--moderate);
+  border: 1px solid var(--moderate-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.badge-dirty {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: var(--dirty-bg);
+  color: var(--dirty);
+  border: 1px solid var(--dirty-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-light);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: var(--surface-hover);
+  border-color: var(--text-muted);
+}
+
+/* Multi-Jurisdiction Grid */
+.jurisdiction-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
+  gap: 1.75rem;
+  margin-top: 0.75rem;
+}
+
+.jurisdiction-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.jurisdiction-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+/* Carbon-intensity spectrum bar (WorldMap legend + per-row mini rulers).
+   Global because the SpectrumBar component renders on several routes that
+   don't all import the demo stylesheet; without these the gradient never
+   showed and the tick labels collapsed together. */
+.spectrum-bar-wrap { margin: 0.25rem 0 0; }
+.spectrum-divider {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,
+    var(--clean) 0%, var(--clean) 15%,
+    var(--moderate) 45%, #f97316 70%, var(--dirty) 100%);
+}
+.spectrum-ticks {
   display: flex;
   justify-content: space-between;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
+  margin-top: 6px;
+  font-size: 0.72rem;
   color: var(--text-faint);
-  margin-top: 0.35rem;
-  letter-spacing: 0.02em;
+  font-weight: 600;
 }
-
-.spectrum-bar-wrap {
-  margin-bottom: 1.75rem;
-}
-
 .spectrum-mini {
   position: relative;
-  height: 4px;
-  width: 56px;
-  border-radius: 2px;
-  background: var(--spectrum-gradient);
-  flex-shrink: 0;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--clean), var(--moderate), var(--dirty));
 }
-
 .spectrum-mini .marker {
   position: absolute;
   top: -2px;
-  width: 2px;
-  height: 8px;
-  background: var(--text);
-  box-shadow: 0 0 4px rgba(0,0,0,0.6);
-  transform: translateX(-1px);
-}
-
-/* ---------- Panels ---------- */
-
-.glass-panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-}
-
-.glass-panel.no-padding { padding: 0; }
-.glass-panel.overflow-hidden { overflow: hidden; }
-
-.panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.9rem 1.1rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.panel-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ---------- Grid ---------- */
-
-.grid-layout {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 1.5rem;
-  min-width: 0;
-}
-
-.left-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  min-width: 0;
-}
-
-@media (max-width: 980px) {
-  .grid-layout { grid-template-columns: 1fr; }
-  .sidebar-sticky { position: static !important; max-height: none !important; }
-}
-
-@media (max-width: 640px) {
-  .dashboard-container { padding: 0 1rem 2rem; }
-  .console-header { flex-direction: column; }
-}
-
-/* ---------- Controls ---------- */
-
-input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 4px;
-  background: var(--line);
+  width: 3px;
+  height: 10px;
+  background: var(--text-main);
   border-radius: 2px;
-  margin: 8px 0 4px;
+  transform: translateX(-50%);
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg-deep);
-  box-shadow: 0 0 0 1px var(--accent-line);
-  cursor: pointer;
-  transition: transform 0.15s ease;
-}
+/* Audit decision cards use <details>/<summary> for expand-to-explain; hide
+   the default disclosure triangle since our own layout carries the affordance. */
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
 
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--bg-deep);
-  cursor: pointer;
-}
-
-.control-group {
-  margin-bottom: 1.25rem;
-}
-
-.control-group label {
-  font-size: 0.72rem;
+.simulated-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  display: block;
-  margin-bottom: 2px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--moderate-bg);
+  color: var(--moderate);
+  border: 1px solid var(--moderate-border);
 }
 
-.control-label {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-}
-
-button {
-  cursor: pointer;
-  font-family: 'IBM Plex Sans', sans-serif;
-  background: var(--accent);
-  color: #06291F;
-  border: none;
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 1.1rem;
-  font-weight: 600;
-  font-size: 0.8rem;
-  transition: filter 0.15s ease, transform 0.1s ease;
-}
-
-button:hover { filter: brightness(1.08); }
-button:active { transform: translateY(1px); }
-button:disabled { opacity: 0.35; cursor: not-allowed; }
-
-.status-badge {
-  padding: 4px 9px;
-  border-radius: 4px;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-}
-
-.status-pass { background: rgba(61, 220, 132, 0.14); color: var(--spectrum-clean); }
-.status-fail { background: var(--danger-dim); color: var(--danger); }
-
-/* ---------- Table ---------- */
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'IBM Plex Sans', sans-serif;
-}
-
-th, td {
-  padding: 0.85rem 1.1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-th {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-}
-
-td.mono, td .mono { font-family: 'IBM Plex Mono', monospace; }
-
-.rsm-svg {
-  filter: none;
-}
-
-/* ---------- Motion (used sparingly, respects reduced-motion) ---------- */
-
-@media (prefers-reduced-motion: no-preference) {
-  .results-table tr { transition: background 0.2s ease; }
-  .explainability-panel { animation: slideIn 0.4s ease-out; }
-  .status-badge.pulse { animation: badge-pulse 2.4s ease-in-out infinite; }
-  .pulse-animation { animation: map-pulse 2.4s ease-in-out infinite; }
-}
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes badge-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.55; }
-}
-
-@keyframes map-pulse {
-  0% { r: 6; opacity: 1; }
-  50% { r: 11; opacity: 0.35; }
-  100% { r: 6; opacity: 1; }
-}
-
-.results-table tr:hover {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.results-table .mini-badge {
-  background: var(--surface-raised);
-  border: 1px solid var(--line);
-  color: var(--text-dim);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.66rem;
-}
-
-.sidebar-sticky {
-  position: sticky;
-  top: 1.5rem;
-  max-height: calc(100vh - 3rem);
-  overflow-y: auto;
-}
-
-.rejected-card-small {
-  background: var(--danger-dim);
-  border: 1px solid rgba(232, 93, 74, 0.2) !important;
-}
-
-.best-region-glow {
-  border-left: 3px solid var(--accent) !important;
-  background: var(--accent-dim);
-}
-
-.explainability-panel {
-  border-left: 3px solid var(--spectrum-clean) !important;
-  background: rgba(61, 220, 132, 0.05);
+/* Guided-tour spotlight ring (applied by AwsSpotlightTour to the active step).
+   box-shadow is used instead of outline so the --primary token resolves. */
+.tour-highlight {
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 3px var(--primary), 0 0 0 9px var(--primary-subtle) !important;
+  transition: box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
 }

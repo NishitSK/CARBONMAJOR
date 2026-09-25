@@ -153,12 +153,6 @@ RESEARCH_FILES = {
         "title": "Live AWS pilot report",
         "description": "Summary results from the live multi-region AWS pilot deployment.",
     },
-    "pilot_instances": {
-        "filename": "pilot_instances.json",
-        "category": "pilot",
-        "title": "Live AWS pilot instances",
-        "description": "Metadata for the real AWS instances used in the pilot deployment.",
-    },
     "real_workload_cpu": {
         "filename": "real_workload_cpu.json",
         "category": "pilot",

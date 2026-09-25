@@ -50,3 +50,61 @@ carbon_scheduler_ui/dist/
 /council-report-*.html
 /council-transcript-*.md
 /references.bib
+
+# Live infrastructure inventories: instance IDs and public IPs, never published.
+carbon_scheduler/data/pilot_instances*.json
+carbon_scheduler/data/*_output.log
+carbon_scheduler/data/workload_migration_output*.log
+carbon_scheduler/data/cycle_output.log
+carbon_scheduler/data/cloud_vantage_output.log
+
+# Internal working notes, session exports and drafts: kept local.
+update.md
+CHAT_EXPORT_*.md
+COMPLETE_SEMINAR_AND_MAJOR_PROJECT_MASTER_REPORT.md
+SEMINAR_AND_BOOK_CHAPTER_TOPICS.md
+ONE_MONTH_AI_UPGRADE_PLAN.md
+PROJECT_EXPLAINER_SPEECH.txt
+AWS_COST_AND_SECURITY_AUDIT.md
+carbon_scheduler/REPORT_*.md
+.agents/
+
+# Transient runtime state (rebuilt every cycle)
+carbon_scheduler/data/pending_forecasts.json
+carbon_scheduler/data/pilot_adaptive_active.json
+carbon_scheduler/data/workload_active_region.json
+
+# Internal briefs and notes
+mentor-brief-*.html
+previous data.md
+
+# Raw pilot logs and verification records hold measured Electricity Maps
+# carbon-intensity values. Academic use is granted; redistribution is not
+# (ToS 2026-03-24, section 3). Publish the derived subset instead:
+#   python scripts/export_public_evidence.py  ->  data/public/
+carbon_scheduler/data/pilot_adaptive.jsonl
+carbon_scheduler/data/pilot_lstm.jsonl
+carbon_scheduler/data/pilot_arima.jsonl
+carbon_scheduler/data/forecast_verification.jsonl
+carbon_scheduler/data/pilot_log.jsonl
+carbon_scheduler/data/pilot_log_cloud_vantage.jsonl
+carbon_scheduler/data/pilot_log_tagged.jsonl
+carbon_scheduler/data/predictions_24h.json
+carbon_scheduler/data/evaluation_report*.json
+
+# Throwaway plot dumps (and they embed measured intensity values)
+carbon_scheduler/data/*.html
+
+# Windows Task Scheduler glue: local-machine specific
+carbon_scheduler/run_*.bat
+carbon_scheduler/register_*.bat
+carbon_scheduler/register_*.ps1
+carbon_scheduler/silent_runner.vbs
+
+# Trained LSTM weights: derived from licensed Electricity Maps history and
+# regenerable with scripts/train_lstm.py once you have your own data.
+carbon_scheduler/models/*.pt
+
+# Ad-hoc print-based smoke scripts, superseded by the UI parity tests
+/test_scheduler.py
+/test_joint_scheduler.py

@@ -1,0 +1,145 @@
+{
+  "n_decisions": 2924,
+  "oracle_mean_ci": 20.984876880984952,
+  "oracle_mean_ci_published_reference": 20.984876880984952,
+  "oracle_discrepancy_g": 0.0,
+  "arima_forecast_driven_mean_ci": 21.514028727770178,
+  "lstm_forecast_driven_mean_ci": 21.565403556771546,
+  "static_lookup_mean_ci_reference": 21.575218878248975,
+  "fixed_baseline_mean_ci_reference": 405.0427393980848,
+  "arima_vs_static_lookup_pct": 0.28361311569583214,
+  "arima_vs_fixed_baseline_pct": 94.68845466536663,
+  "lstm_vs_static_lookup_pct": 0.04549349664917908,
+  "lstm_vs_fixed_baseline_pct": 94.67577086091732,
+  "agreement_with_oracle": {
+    "arima_agree_count": 2728,
+    "arima_agree_pct": 93.296853625171,
+    "lstm_agree_count": 2704,
+    "lstm_agree_pct": 92.47606019151847
+  },
+  "paired_t_test_vs_oracle": {
+    "arima": {
+      "t_stat": 11.12897703546311,
+      "p_value": 3.3161314272827742e-28
+    },
+    "lstm": {
+      "t_stat": 11.65881338559455,
+      "p_value": 9.80268107215371e-31
+    }
+  },
+  "arima_fit_diagnostics": {
+    "monthly_fits_attempted_total": 240,
+    "monthly_fits_failed_total": 1,
+    "monthly_fits_converged_with_warnings_total": 121,
+    "monthly_fits_converged_clean_total": 118,
+    "per_anchor_fallback_total": 124,
+    "per_zone": {
+      "US-MIDA-PJM": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 24,
+        "monthly_fits_converged_clean": 0,
+        "per_anchor_fallback_count": 0
+      },
+      "IE": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 9,
+        "monthly_fits_converged_clean": 15,
+        "per_anchor_fallback_count": 0
+      },
+      "DE": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 7,
+        "monthly_fits_converged_clean": 17,
+        "per_anchor_fallback_count": 0
+      },
+      "IN-WE": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 3,
+        "monthly_fits_converged_clean": 21,
+        "per_anchor_fallback_count": 0
+      },
+      "CA-QC": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 18,
+        "monthly_fits_converged_clean": 6,
+        "per_anchor_fallback_count": 0
+      },
+      "US-NW-PACW": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 7,
+        "monthly_fits_converged_clean": 17,
+        "per_anchor_fallback_count": 0
+      },
+      "SE": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 22,
+        "monthly_fits_converged_clean": 2,
+        "per_anchor_fallback_count": 0
+      },
+      "SG": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 1,
+        "monthly_fits_converged_with_warnings": 9,
+        "monthly_fits_converged_clean": 14,
+        "per_anchor_fallback_count": 124
+      },
+      "JP": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 0,
+        "monthly_fits_converged_clean": 24,
+        "per_anchor_fallback_count": 0
+      },
+      "US-MIDW-MISO": {
+        "monthly_fits_attempted": 24,
+        "monthly_fits_failed": 0,
+        "monthly_fits_converged_with_warnings": 22,
+        "monthly_fits_converged_clean": 2,
+        "per_anchor_fallback_count": 0
+      }
+    }
+  },
+  "lstm_fit_diagnostics": {
+    "per_anchor_fallback_total": 0,
+    "per_zone": {
+      "US-MIDA-PJM": {
+        "per_anchor_fallback_count": 0
+      },
+      "IE": {
+        "per_anchor_fallback_count": 0
+      },
+      "DE": {
+        "per_anchor_fallback_count": 0
+      },
+      "IN-WE": {
+        "per_anchor_fallback_count": 0
+      },
+      "CA-QC": {
+        "per_anchor_fallback_count": 0
+      },
+      "US-NW-PACW": {
+        "per_anchor_fallback_count": 0
+      },
+      "SE": {
+        "per_anchor_fallback_count": 0
+      },
+      "SG": {
+        "per_anchor_fallback_count": 0
+      },
+      "JP": {
+        "per_anchor_fallback_count": 0
+      },
+      "US-MIDW-MISO": {
+        "per_anchor_fallback_count": 0
+      }
+    }
+  },
+  "smoke_test": false
+}

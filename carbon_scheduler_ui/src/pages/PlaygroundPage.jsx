@@ -1,182 +1,250 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  Leaf, AlertTriangle, CheckCircle, RefreshCw, Globe, Activity, Play, Pause,
-  Lock, Unlock, Shield, Clock, ArrowLeft, FlaskConical
+  Leaf, AlertTriangle, Play, Pause,
+  Lock, Unlock, Activity, Clock, FlaskConical, Sliders, Zap, Compass
 } from 'lucide-react';
+import TopNavbar from '../components/layout/TopNavbar';
 import WorldMap from '../components/demo/WorldMap';
-import { SpectrumDivider } from '../components/demo/SpectrumBar';
 import ScoringControls from '../components/demo/ScoringControls';
 import RegionRankingsTable from '../components/demo/RegionRankingsTable';
 import RejectedRegionsPanel from '../components/demo/RejectedRegionsPanel';
-import DaySimControls from '../components/demo/DaySimControls';
+import FleetPanel from '../components/demo/FleetPanel';
+import TimelineMigrationPath from '../components/demo/TimelineMigrationPath';
 import { useLiveScheduler } from '../hooks/useLiveScheduler';
+import { useClientFleet } from '../hooks/useClientFleet';
 import '../styles/demo.css';
+import '../styles/console.css';
 
-// The old fake-data sandbox (random drift / synthetic day simulation /
-// live-fixed toggle), relocated off the main narrative page per the
-// "the demo model has to work with the data it has" direction -- this is
-// still a legitimate "play with the live scoring knobs" tool, just not the
-// thing that represents "real data" on the main site.
 export default function PlaygroundPage() {
-  const s = useLiveScheduler();
+  const fleet = useClientFleet();
+  const fleetRegions = React.useMemo(
+    () => [...new Set((fleet.servers || []).map(sv => sv.zoneName))],
+    [fleet.servers]
+  );
+  const s = useLiveScheduler({ allowedRegionNames: fleetRegions });
+  const regionNames = (s.regions || []).map(r => r.name);
+
+  // A scenario sets the whole situation at once: the regions you run in, the
+  // latency budget and the weights. Setting only the budget used to leave
+  // nothing eligible when the fleet sat outside it.
+  const applyScenario = (regions, sla, weights) => {
+    fleet.resetFleet();
+    regions.forEach((r) => fleet.addServer(`server-${r.split(' ')[0]}`, r));
+    s.setMaxLatency(sla);
+    Object.entries(weights).forEach(([k, v]) => s.handleWeightChange(k, v));
+    s.resetSelection();
+  };
 
   return (
-    <div className="dashboard-container">
-      <header>
-        <div className="glass-panel info-panel" style={{ margin: '0 0 1.25rem 0', borderLeft: '3px solid var(--accent)' }}>
-          <FlaskConical size={16} color="var(--accent)" style={{ flexShrink: 0, marginTop: '2px' }} />
-          <p>
-            <strong style={{ color: 'var(--text)' }}>Scoring-engine sandbox, not a data source.</strong>{' '}
-            &ldquo;Demo Mode&rdquo;, &ldquo;Random drift&rdquo;, and &ldquo;Day simulation&rdquo; below use synthetic
-            carbon-intensity values to exercise the scheduler's logic, not real grid readings. For real
-            2021&ndash;2025 historical data, see <Link to="/" style={{ color: 'var(--accent)' }}>Historical Replay</Link> on
-            the homepage or the <Link to="/console" style={{ color: 'var(--accent)' }}>Console</Link>. Only &ldquo;Live maps&rdquo; mode below uses real, live carbon data.
-          </p>
-        </div>
-        <div className="console-header">
-          <div>
-            <Link to="/" className="ghost-btn" style={{ marginBottom: '0.9rem', display: 'inline-flex' }}>
-              <ArrowLeft size={13} /> Back to research site
-            </Link>
-            <div className="console-eyebrow">Carbon-aware placement engine · sandbox</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <Shield size={22} color="var(--accent)" />
-              <h1>Scoring Playground</h1>
-            </div>
-            <p className="console-sub">
-              {s.bestRegion
-                ? <>Routing to <strong style={{ color: 'var(--accent)' }}>{s.bestRegion.name}</strong>{s.daySimOn ? ` at hour ${String(s.simHour).padStart(2, '0')}:00` : ' right now'}</>
-                : 'Awaiting region data…'}
-            </p>
-          </div>
+    <div className="app-layout">
+      <TopNavbar />
 
-          <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-            <div className="glass-panel savings-counter" title="Illustrative kg CO2 avoided vs. average eligible region, accrued per snapshot">
-              <Leaf size={15} color="var(--spectrum-clean)" />
-              <span className="savings-value mono">{s.cumulativeSavingsKg.toFixed(3)} kg CO₂ saved</span>
-            </div>
-
-            <div className="glass-panel header-controls" style={{ display: 'flex', gap: '0.6rem', padding: '0.4rem 0.6rem' }}>
-              <div className="toggle-group">
-                <button onClick={() => s.setDemoMode(!s.demoMode)} className={`toggle-btn ${s.demoMode ? 'on' : ''}`} title="Locks the sandbox to a fixed synthetic scenario (seed 42) instead of drifting/live values">
-                  {s.demoMode ? <Lock size={13} /> : <Unlock size={13} />}
-                  SYNTHETIC {s.demoMode ? 'LOCKED' : 'OFF'}
-                </button>
-                <button onClick={() => s.setDebugMode(!s.debugMode)} className={`toggle-btn ${s.debugMode ? 'on' : ''}`}>
-                  {s.debugMode ? <Activity size={13} /> : <RefreshCw size={13} />}
-                  DEBUG {s.debugMode ? 'ON' : 'OFF'}
-                </button>
+      <main className="main-content">
+        <div className="page-header">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div>
+              <div style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--primary)', letterSpacing: '0.08em', marginBottom: '0.4rem' }}>
+                Interactive Simulation Sandbox
               </div>
-              <div className="header-sep"></div>
+              <h1 className="page-title">Policy & Spatial Migration Playground</h1>
+              <p className="page-subtitle">
+                {s.activeRegion
+                  ? <>
+                      {fleetRegions.length === 0
+                        ? (s.isOverride ? 'Planned Placement (manual choice): ' : 'Planned Optimal Placement: ')
+                        : (s.isOverride ? 'Active Placement (manual override): ' : 'Active Optimal Placement: ')}
+                      <strong style={{ color: s.isOverride ? 'var(--primary)' : 'var(--clean)' }}>{s.activeRegion.name}</strong>
+                      {s.isOverride ? ` · optimal is ${s.bestRegion.name}` : ''}
+                      {s.daySimOn ? ` at simulation hour ${String(s.simHour).padStart(2, '0')}:00 UTC` : ''}
+                    </>
+                  : 'Awaiting candidate telemetry…'}
+              </p>
+            </div>
+
+            {/* Sandbox Controls Bar */}
+            <div id="tour-solar-trail" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+              <div className="card" style={{ padding: '0.6rem 1.25rem', marginBottom: 0, display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <Leaf size={18} color="var(--clean)" />
+                <span className="mono" style={{ fontWeight: 700, color: 'var(--clean)', fontSize: '1rem' }}>
+                  {s.cumulativeSavingsKg.toFixed(3)} kg CO₂ avoided
+                </span>
+              </div>
 
               <button
-                onClick={() => s.setIsAutoSimulating(!s.isAutoSimulating)}
-                disabled={s.demoMode || s.daySimOn}
-                className={`ghost-btn ${s.isAutoSimulating ? 'ghost-btn-on' : ''}`}
+                onClick={() => s.setDemoMode(!s.demoMode)}
+                className={`btn ${s.demoMode ? 'btn-primary' : 'btn-outline'}`}
+                style={{ padding: '0.65rem 1rem', fontSize: '0.85rem' }}
+                title="Locks the sandbox to a fixed reference scenario (seed 42)"
               >
-                {s.isAutoSimulating ? <Pause size={13} /> : <Play size={13} />}
-                {s.isAutoSimulating ? 'Stop drift' : 'Random drift'}
+                {s.demoMode ? <Lock size={15} /> : <Unlock size={15} />}
+                {s.demoMode ? 'Seed-42 Locked' : 'Live Mode'}
               </button>
-              <div className="header-sep"></div>
-              <button onClick={() => s.setMode('live')} disabled={s.daySimOn} className={`ghost-btn live-btn ${s.mode === 'live' ? 'live-btn-on' : ''}`}>
-                <Activity size={13} /> Live maps
-              </button>
-              <div className="header-sep"></div>
-              <button onClick={s.toggleDaySim} className={`ghost-btn day-sim-btn ${s.daySimOn ? 'day-sim-btn-on' : ''}`}>
-                <Clock size={13} /> Day simulation
+
+              <button
+                onClick={s.toggleDaySim}
+                className={`btn ${s.daySimOn ? 'btn-primary' : 'btn-outline'}`}
+                style={{ padding: '0.65rem 1rem', fontSize: '0.85rem' }}
+              >
+                <Compass size={15} /> {s.daySimOn ? '24h Path Active' : 'Enable 24h Solar Path'}
               </button>
             </div>
           </div>
         </div>
 
+        {/* 24-Hour Timeline Migration Path Visualizer (Visible when 24h Path is Active or Enabled) */}
         {s.daySimOn && (
-          <DaySimControls
-            daySimPlaying={s.daySimPlaying}
-            onTogglePlay={() => s.setDaySimPlaying(p => !p)}
-            simHour={s.simHour}
-            onScrub={(h) => { s.setDaySimPlaying(false); s.setSimHour(h); }}
-            dailySeries={s.dailySeries}
-          />
+          <div style={{ marginBottom: '2rem' }}>
+            <TimelineMigrationPath
+              daySimPlaying={s.daySimPlaying}
+              onTogglePlay={() => s.setDaySimPlaying(p => !p)}
+              simHour={s.simHour}
+              onScrub={(h) => { s.setDaySimPlaying(false); s.setSimHour(h); }}
+              dailySeries={s.dailySeries}
+              regions={s.regions}
+              bestRegion={s.bestRegion}
+            />
+          </div>
         )}
 
-        <SpectrumDivider />
-      </header>
-
-      {s.error && (
-        <div className="glass-panel status-fail" style={{ textAlign: 'center', margin: '0 0 1.25rem' }}>
-          <AlertTriangle style={{ verticalAlign: 'middle', marginRight: '8px' }} />
-          {s.error} (Check port 8001)
-        </div>
-      )}
-
-      <div className="grid-layout">
-        <div className="left-panel">
-          <section className="glass-panel no-padding overflow-hidden" style={{ minHeight: '400px' }}>
-            <div className="panel-header">
-              <span className="panel-title">
-                <Globe size={16} color="var(--accent)" /> Deployment Map
-              </span>
-              <div style={{ display: 'flex', gap: '8px' }}>
-                {s.demoMode && <span className="status-badge" style={{ background: 'var(--accent-dim)', color: 'var(--accent)' }}>Simulation locked · seed 42</span>}
-                {s.isAutoSimulating && <span className="status-badge pulse" style={{ background: 'var(--accent-dim)', color: 'var(--accent)' }}>Live drift active</span>}
+        {/* Presentation Presets Bar */}
+        <div className="card" style={{ padding: '0.85rem 1.25rem', marginBottom: '1.5rem', background: 'var(--bg-subtle)', borderColor: 'var(--border-subtle)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div>
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', color: 'var(--primary)', letterSpacing: '0.05em' }}>
+                Scenario presets
+              </div>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                Each one sets a server fleet, a latency budget and the scoring weights together
               </div>
             </div>
-            <WorldMap
-              regions={s.regions || []}
-              bestRegionName={s.bestRegion?.name}
-              onRegionClick={(r) => {
-                if (!r) return;
-                const el = document.getElementById(`region-${r.name}`);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }}
-            />
-          </section>
+            <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+              <button
+                className="btn btn-outline"
+                style={{ fontSize: '0.8rem', padding: '0.45rem 0.85rem', borderColor: 'rgba(59, 130, 246, 0.4)' }}
+                onClick={() => applyScenario(
+                  ['ap-south-1 (Mumbai)', 'ap-southeast-1 (Singapore)', 'ap-northeast-1 (Tokyo)'],
+                  150,
+                  { carbon: 0.5, latency: 0.3, resources: 0.2 }
+                )}
+              >
+                <span>🌏</span> <strong>APAC sovereign (DPDP)</strong>
+              </button>
 
-          {s.explanation && s.explanation.details && (
-            <section className="glass-panel explainability-panel">
-              <div style={{ display: 'flex', gap: '12px' }}>
-                <div style={{ background: 'var(--spectrum-clean)', borderRadius: '50%', padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', flexShrink: 0 }}>
-                  <CheckCircle size={20} color="#06291F" />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: '1.05rem', margin: 0, fontFamily: "'Space Grotesk', sans-serif" }}>Recommended placement</h3>
-                  <p style={{ color: 'var(--text)', fontSize: '0.92rem', marginTop: '0.4rem', fontWeight: 400 }}>
-                    {s.explanation.summary || 'Recommended based on balance.'}
-                  </p>
-                  <div style={{ display: 'flex', gap: '1.5rem', marginTop: '1rem' }}>
-                    <div className="explanation-metric">
-                      <span className="label">Carbon Impact</span>
-                      <span className="value">{s.explanation.details.carbon_impact}</span>
-                    </div>
-                    <div className="explanation-metric">
-                      <span className="label">Performance</span>
-                      <span className="value">{s.explanation.details.performance}</span>
-                    </div>
-                    <div className="explanation-metric">
-                      <span className="label">Available Capacity</span>
-                      <span className="value">{s.explanation.details.capacity}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
+              <button
+                className="btn btn-outline"
+                style={{ fontSize: '0.8rem', padding: '0.45rem 0.85rem', borderColor: 'rgba(16, 185, 129, 0.4)' }}
+                onClick={() => applyScenario(
+                  ['us-east-1 (N. Virginia)', 'us-east-2 (Ohio)', 'ca-central-1 (Canada)'],
+                  250,
+                  { carbon: 0.4, latency: 0.4, resources: 0.2 }
+                )}
+              >
+                <span>🛡️</span> <strong>Americas (HIPAA)</strong>
+              </button>
 
-          <RejectedRegionsPanel rejected={s.rejected} />
-          <RegionRankingsTable results={s.results} debugMode={s.debugMode} onExportCsv={s.exportCsv} />
+              <button
+                className="btn btn-outline"
+                style={{ fontSize: '0.8rem', padding: '0.45rem 0.85rem', borderColor: 'rgba(234, 179, 8, 0.4)' }}
+                onClick={() => applyScenario([], 400, { carbon: 0.7, latency: 0.1, resources: 0.2 })}
+              >
+                <span>⚡</span> <strong>Global batch (any region)</strong>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <aside>
-          <ScoringControls
-            weights={s.weights}
-            onWeightChange={s.handleWeightChange}
-            maxLatency={s.maxLatency}
-            onMaxLatencyChange={s.setMaxLatency}
-            bestRegion={s.bestRegion}
-          />
-        </aside>
-      </div>
+        {s.error && (
+          <div className="card" style={{ borderColor: 'var(--dirty-border)', background: 'var(--dirty-bg)', textAlign: 'center', padding: '1rem' }}>
+            <AlertTriangle style={{ verticalAlign: 'middle', marginRight: '8px', color: 'var(--dirty)' }} />
+            {s.error}
+          </div>
+        )}
+
+        {/* 2-Column Main Workspace */}
+        <div className="playground-grid">
+          {/* Left Column: World Map, Rankings Table */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <FleetPanel
+              servers={fleet.servers || []}
+              regionNames={regionNames}
+              rejectedNames={(s.rejectedRegions || []).map(r => r.name)}
+              onAdd={fleet.addServer}
+              onRemove={fleet.removeServer}
+              onChangeZone={fleet.changeServerZone}
+              onLoadExample={fleet.loadDemoFleet}
+              onClear={fleet.resetFleet}
+            />
+
+            <WorldMap
+              regions={s.regions}
+              bestRegionName={s.bestRegion ? s.bestRegion.name : undefined}
+              activeRegionName={s.activeRegion ? s.activeRegion.name : undefined}
+              onRegionClick={(region) => {
+                // Only regions inside the SLA budget can become the placement.
+                if (s.results.some(r => r.region?.name === region.name)) s.setSelectedRegion(region.name);
+              }}
+            />
+
+            <RejectedRegionsPanel rejected={s.rejectedRegions} />
+
+            <div className="card">
+              <div className="card-header">
+                <h2 className="card-title">Multi-Criteria Candidate Rankings</h2>
+                <button className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '0.4rem 0.8rem' }} onClick={s.exportCsv}>
+                  Export CSV
+                </button>
+              </div>
+
+              {s.results.length === 0 && (
+                <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', padding: '0.5rem 0 1rem' }}>
+                  {fleetRegions.length > 0
+                    ? `Every region in your fleet is above the ${s.maxLatency} ms latency budget, so nothing is eligible. Raise the budget, or add a server closer to your users.`
+                    : 'No candidate regions yet — waiting for telemetry.'}
+                </p>
+              )}
+
+              {fleetRegions.length === 0 && s.results.length > 0 && (
+                <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', padding: '0 0 0.75rem' }}>
+                  Planning mode: you have no servers yet, so these are candidate locations and the choice below is a
+                  proposal. Add a server above to rank only the regions you actually run in.
+                </p>
+              )}
+
+              <RegionRankingsTable
+                hideHeader
+                planningMode={fleetRegions.length === 0}
+                results={s.results}
+                debugMode={s.debugMode}
+                activeRegionName={s.activeRegion ? s.activeRegion.name : undefined}
+                onSelectRegion={(name) => s.setSelectedRegion(name)}
+              />
+            </div>
+          </div>
+
+          {/* Right Column: Scoring Sliders & Explanations */}
+          <aside style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="card">
+              <div className="card-header">
+                <h2 className="card-title">Policy Weights & SLA Limits</h2>
+              </div>
+
+              <ScoringControls
+                weights={s.weights}
+                onWeightChange={s.handleWeightChange}
+                maxLatency={s.maxLatency}
+                onMaxLatencyChange={s.setMaxLatency}
+                bestRegion={s.bestRegion}
+                activeRegion={s.activeRegion}
+                isOverride={s.isOverride}
+                overrideImpact={s.overrideImpact}
+                onResetSelection={s.resetSelection}
+                explanation={s.explanation}
+              />
+            </div>
+          </aside>
+        </div>
+      </main>
     </div>
   );
 }

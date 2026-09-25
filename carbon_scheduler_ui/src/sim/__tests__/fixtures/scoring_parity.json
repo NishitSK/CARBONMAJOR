@@ -1,0 +1,317 @@
+{
+  "regions": [
+    {
+      "name": "r-clean-far",
+      "carbon": 25,
+      "latency": 240,
+      "resources": 60
+    },
+    {
+      "name": "r-clean-near",
+      "carbon": 40,
+      "latency": 150,
+      "resources": 45
+    },
+    {
+      "name": "r-mid",
+      "carbon": 210,
+      "latency": 120,
+      "resources": 80
+    },
+    {
+      "name": "r-mid-tie",
+      "carbon": 210,
+      "latency": 120,
+      "resources": 90
+    },
+    {
+      "name": "r-dirty-near",
+      "carbon": 690,
+      "latency": 15,
+      "resources": 95
+    },
+    {
+      "name": "r-dirty-far",
+      "carbon": 520,
+      "latency": 310,
+      "resources": 30
+    }
+  ],
+  "cases": [
+    {
+      "id": "default",
+      "weights": {
+        "carbon": 0.4,
+        "latency": 0.3,
+        "resources": 0.3
+      },
+      "max_latency": 200,
+      "expected": {
+        "success": true,
+        "eligible": [
+          {
+            "name": "r-mid-tie",
+            "score": 0.1346,
+            "c_norm": 0.262,
+            "l_norm": 0.0,
+            "r_penalty": 0.1,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-mid",
+            "score": 0.1646,
+            "c_norm": 0.262,
+            "l_norm": 0.0,
+            "r_penalty": 0.2,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-clean-near",
+            "score": 0.165,
+            "c_norm": 0.0,
+            "l_norm": 0.0,
+            "r_penalty": 0.55,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency"
+            ]
+          },
+          {
+            "name": "r-dirty-near",
+            "score": 0.415,
+            "c_norm": 1.0,
+            "l_norm": 0.0,
+            "r_penalty": 0.05,
+            "strengths": [
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          }
+        ],
+        "rejected": [
+          "r-clean-far",
+          "r-dirty-far"
+        ],
+        "summary": "Selected r-mid-tie as the optimal placement. It excels in: Low Carbon, Low Latency, High Resource Availability."
+      }
+    },
+    {
+      "id": "carbon_heavy_wide_sla",
+      "weights": {
+        "carbon": 0.8,
+        "latency": 0.2,
+        "resources": 0.0
+      },
+      "max_latency": 250,
+      "expected": {
+        "success": true,
+        "eligible": [
+          {
+            "name": "r-clean-near",
+            "score": 0.018,
+            "c_norm": 0.023,
+            "l_norm": 0.0,
+            "r_penalty": 0.55,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency"
+            ]
+          },
+          {
+            "name": "r-clean-far",
+            "score": 0.2,
+            "c_norm": 0.0,
+            "l_norm": 1.0,
+            "r_penalty": 0.4,
+            "strengths": [
+              "Low Carbon"
+            ]
+          },
+          {
+            "name": "r-mid-tie",
+            "score": 0.2226,
+            "c_norm": 0.278,
+            "l_norm": 0.0,
+            "r_penalty": 0.1,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-mid",
+            "score": 0.2226,
+            "c_norm": 0.278,
+            "l_norm": 0.0,
+            "r_penalty": 0.2,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-dirty-near",
+            "score": 0.8,
+            "c_norm": 1.0,
+            "l_norm": 0.0,
+            "r_penalty": 0.05,
+            "strengths": [
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          }
+        ],
+        "rejected": [
+          "r-dirty-far"
+        ],
+        "summary": "Selected r-clean-near as the optimal placement. It excels in: Low Carbon, Low Latency."
+      }
+    },
+    {
+      "id": "latency_heavy_widest_sla",
+      "weights": {
+        "carbon": 0.2,
+        "latency": 0.7,
+        "resources": 0.1
+      },
+      "max_latency": 400,
+      "expected": {
+        "success": true,
+        "eligible": [
+          {
+            "name": "r-clean-near",
+            "score": 0.0595,
+            "c_norm": 0.023,
+            "l_norm": 0.0,
+            "r_penalty": 0.55,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency"
+            ]
+          },
+          {
+            "name": "r-mid-tie",
+            "score": 0.0656,
+            "c_norm": 0.278,
+            "l_norm": 0.0,
+            "r_penalty": 0.1,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-mid",
+            "score": 0.0756,
+            "c_norm": 0.278,
+            "l_norm": 0.0,
+            "r_penalty": 0.2,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-dirty-near",
+            "score": 0.205,
+            "c_norm": 1.0,
+            "l_norm": 0.0,
+            "r_penalty": 0.05,
+            "strengths": [
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          },
+          {
+            "name": "r-clean-far",
+            "score": 0.2945,
+            "c_norm": 0.0,
+            "l_norm": 0.364,
+            "r_penalty": 0.4,
+            "strengths": [
+              "Low Carbon"
+            ]
+          },
+          {
+            "name": "r-dirty-far",
+            "score": 0.9189,
+            "c_norm": 0.744,
+            "l_norm": 1.0,
+            "r_penalty": 0.7,
+            "strengths": []
+          }
+        ],
+        "rejected": [],
+        "summary": "Selected r-clean-near as the optimal placement. It excels in: Low Carbon, Low Latency."
+      }
+    },
+    {
+      "id": "tight_sla",
+      "weights": {
+        "carbon": 0.4,
+        "latency": 0.3,
+        "resources": 0.3
+      },
+      "max_latency": 50,
+      "expected": {
+        "success": true,
+        "eligible": [
+          {
+            "name": "r-dirty-near",
+            "score": 0.015,
+            "c_norm": 0.0,
+            "l_norm": 0.0,
+            "r_penalty": 0.05,
+            "strengths": [
+              "Low Carbon",
+              "Low Latency",
+              "High Resource Availability"
+            ]
+          }
+        ],
+        "rejected": [
+          "r-clean-far",
+          "r-clean-near",
+          "r-mid",
+          "r-mid-tie",
+          "r-dirty-far"
+        ],
+        "summary": "Selected r-dirty-near as the optimal placement. It excels in: Low Carbon, Low Latency, High Resource Availability."
+      }
+    },
+    {
+      "id": "no_eligible",
+      "weights": {
+        "carbon": 0.4,
+        "latency": 0.3,
+        "resources": 0.3
+      },
+      "max_latency": 10,
+      "expected": {
+        "success": false,
+        "eligible": [],
+        "rejected": [
+          "r-clean-far",
+          "r-clean-near",
+          "r-mid",
+          "r-mid-tie",
+          "r-dirty-near",
+          "r-dirty-far"
+        ],
+        "summary": null
+      }
+    }
+  ]
+}

@@ -65,18 +65,9 @@ def forecast_arima_forward(prefitted_model, real_trailing_window: List[float],
 def forecast_lstm_forward(lstm_bundle: dict, real_trailing_24h: List[float],
                            window_start_hour_of_day: int, hours: int) -> Tuple[List[float], bool]:
     """
-    Forecasts up to 24h FORWARD from "now" (the end of real_trailing_24h),
-    using an already-loaded LSTM bundle ({"model", "lo", "hi"}). Exactly
-    mirrors temporal_shift_benchmark.py's lstm_forward_forecast(). Returns
-    (forecast_list, fell_back_to_persistence).
-
-    IMPORTANT: `window_start_hour_of_day` is the hour-of-day (0-23) of the
-    FIRST element of real_trailing_24h (i.e. "now" minus 23 hours), NOT the
-    hour-of-day of "now" itself - the model was trained on hour-of-day
-    features indexed from the start of each input window. Passing the hour
-    of "now" instead silently shifts every prediction by up to 23 hours of
-    diurnal phase and was caught exactly this way by
-    scripts/verify_real_temporal_forecaster.py during initial validation.
+    Forecasts up to `hours` (e.g. 3h, 6h, 12h, 24h) FORWARD from "now" (the end of real_trailing_24h),
+    using an already-loaded LSTM bundle ({"model", "lo", "hi"}). For horizons > model step size (6h),
+    uses autoregressive roll-out. Returns (forecast_list, fell_back_to_persistence).
     """
     if len(real_trailing_24h) < lstm_forecaster.WINDOW_HOURS:
         last = real_trailing_24h[-1] if real_trailing_24h else 0.0
@@ -85,17 +76,29 @@ def forecast_lstm_forward(lstm_bundle: dict, real_trailing_24h: List[float],
     import torch
 
     model, lo, hi = lstm_bundle["model"], lstm_bundle["lo"], lstm_bundle["hi"]
-    window = real_trailing_24h[-lstm_forecaster.WINDOW_HOURS:]
-    seq = []
-    for i, val in enumerate(window):
-        h = (window_start_hour_of_day + i) % 24
-        s, c = lstm_forecaster._hour_features(h)
-        seq.append([(val - lo) / (hi - lo), s, c])
-    with torch.no_grad():
-        x = torch.tensor([seq], dtype=torch.float32)
-        out = model(x)[0].tolist()
-    preds = [max(0.0, v * (hi - lo) + lo) for v in out]
-    return preds[:hours], False
+    curr_window = list(real_trailing_24h[-lstm_forecaster.WINDOW_HOURS:])
+    curr_start_hour = window_start_hour_of_day
+    all_preds = []
+
+    try:
+        while len(all_preds) < hours:
+            seq = []
+            for i, val in enumerate(curr_window[-lstm_forecaster.WINDOW_HOURS:]):
+                h = (curr_start_hour + i) % 24
+                s, c = lstm_forecaster._hour_features(h)
+                seq.append([(val - lo) / (hi - lo), s, c])
+            with torch.no_grad():
+                x = torch.tensor([seq], dtype=torch.float32)
+                out = model(x)[0].tolist()
+            batch_preds = [round(max(0.0, float(v * (hi - lo) + lo)), 2) for v in out]
+            all_preds.extend(batch_preds)
+            curr_window.extend(batch_preds)
+            curr_start_hour = (curr_start_hour + len(batch_preds)) % 24
+
+        return all_preds[:hours], False
+    except Exception:
+        last = real_trailing_24h[-1] if real_trailing_24h else 0.0
+        return [last] * hours, True
 
 
 def forecast_adaptive_forward(real_trailing_history: List[float], hours: int,

@@ -5,6 +5,7 @@ import CompactResultRow from '../components/research/CompactResultRow';
 import RawJsonDisclosure from '../components/research/RawJsonDisclosure';
 import PoolSweepTable from '../components/research/PoolSweepTable';
 import StoryCard from '../components/research/StoryCard';
+import RelatedWorkTable from '../components/research/RelatedWorkTable';
 import { useResearchResult } from '../hooks/useResearchResult';
 
 // The lower-key "everything else" section (design principle 3): every
@@ -23,7 +24,6 @@ export default function SupportingEvidenceSection() {
   const multiVantage = useResearchResult('multi_vantage_latency');
   const cloudLatency = useResearchResult('cloud_latency');
   const pilotReport = useResearchResult('pilot_report');
-  const pilotInstances = useResearchResult('pilot_instances');
   const realCpu = useResearchResult('real_workload_cpu');
   const migrationDemo = useResearchResult('workload_migration_demo');
   const stressTest = useResearchResult('synthetic_migration_stress_test');
@@ -115,7 +115,7 @@ export default function SupportingEvidenceSection() {
 
       <h3 className="supporting-group-title">The live AWS pilot</h3>
       <div className="compact-result-list">
-        {pilotReport.data && pilotInstances.data && (
+        {pilotReport.data && (
           <CompactResultRow
             title="Real instances, real latency, running in 12 AWS regions"
             stat={`${pilotReport.data.n_cycles} cycles`}
@@ -162,6 +162,9 @@ export default function SupportingEvidenceSection() {
           <RawJsonDisclosure title="synthetic_migration_stress_test.json" data={stressTest.data} />
         </StoryCard>
       )}
+
+      <h3 className="supporting-group-title">How this compares to prior published work</h3>
+      <RelatedWorkTable />
     </section>
   );
 }

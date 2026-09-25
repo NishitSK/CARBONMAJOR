@@ -3,8 +3,8 @@
   "scheduler_decision": {
     "region": "ca-central-1 (Canada)",
     "score": 0.1043,
-    "carbon_intensity_note": "omitted: measured value",
-    "latency_ms": 14.48
+    "latency_ms": 14.48,
+    "carbon_intensity_note": "omitted: measured Electricity Maps value, not redistributed"
   },
   "job_execution": {
     "status": "Success",

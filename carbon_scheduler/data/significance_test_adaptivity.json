@@ -1,0 +1,23 @@
+{
+  "n_decisions": 7304,
+  "static_lookup_region": "eu-north-1 (Sweden)",
+  "scheduler_mean_ci": 22.09677026286966,
+  "static_lookup_mean_ci": 23.6327573932092,
+  "point_estimate_pct": 6.499398715026372,
+  "paired_t_test": {
+    "t_stat": 26.189471879533347,
+    "p_value": 1.408410234890447e-144
+  },
+  "wilcoxon_signed_rank": {
+    "w_stat": 0.0,
+    "p_value": 1.8591916702646386e-206
+  },
+  "bootstrap_95ci_pct": {
+    "lo": 6.06809953003779,
+    "hi": 6.927623925221344,
+    "mean": 6.49903236439438,
+    "n_resamples": 10000
+  },
+  "significant_at_0.05": true,
+  "bootstrap_ci_excludes_zero": true
+}

@@ -291,11 +291,41 @@ export function useClientFleet() {
   })), []);
   const setActiveServerId = useCallback((activeServerId) => setState(s => ({ ...s, activeServerId })), []);
 
+  const loadDemoFleet = useCallback(() => {
+    const demoServers = [
+      { id: 'sv-1', label: 'eu-north-1 (Stockholm Primary)', zoneName: 'eu-north-1 (Sweden)' },
+      { id: 'sv-2', label: 'eu-central-1 (Frankfurt Web Node)', zoneName: 'eu-central-1 (Frankfurt)' },
+      { id: 'sv-3', label: 'us-east-1 (Virginia Core Gateway)', zoneName: 'us-east-1 (N. Virginia)' },
+      { id: 'sv-4', label: 'ap-southeast-1 (Singapore Edge)', zoneName: 'ap-southeast-1 (Singapore)' },
+      { id: 'sv-5', label: 'ca-central-1 (Montreal Analytics)', zoneName: 'ca-central-1 (Canada)' },
+    ];
+    setState(s => ({
+      ...s,
+      servers: demoServers,
+      activeServerId: 'sv-1',
+      workloads: (s.workloads || DEFAULT_WORKLOADS).map((w, idx) => ({
+        ...w,
+        activeServerId: demoServers[idx % demoServers.length].id,
+      })),
+    }));
+  }, []);
+
+  const resetFleet = useCallback(() => {
+    setState({
+      ...DEFAULT_STATE,
+      servers: [],
+      activeServerId: null,
+      programs: DEFAULT_PROGRAMS,
+      workloads: DEFAULT_WORKLOADS,
+    });
+  }, []);
+
   return {
     ...state,
     addServer, removeServer, renameServer, changeServerZone, switchActiveRegion,
     addProgram, removeProgram, updateProgram, addWorkloadToProgram,
     removeWorkload, updateWorkload, setWorkloadActiveServer, setWorkloadSwitchingMode, switchWorkloadRegion,
     setWeights, setMaxLatency, setSwitchingMode, setActiveServerId,
+    loadDemoFleet, resetFleet,
   };
 }

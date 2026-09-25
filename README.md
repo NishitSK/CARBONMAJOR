@@ -30,30 +30,32 @@ Three things live on top of the same scoring engine, each answering a different 
 <tr>
 <td width="33%" valign="top">
 
-### 🌍 Model showcase
-`/` — the research site
+### 📋 Placement Audit
+`/` — the product
 
-Scrub through **five real years** of grid data (2021–2025) hour by hour and watch the scheduler decide, live, with every rejected region and every score term shown.
-
-</td>
-<td width="33%" valign="top">
-
-### 🎛️ Sandbox
-`/playground` — tune it yourself
-
-Drag the carbon / latency / resource weight sliders, change the latency SLA, and watch the ranking reshuffle in real time against the built-in region pool.
+Triage a fleet workload by workload: **move**, **shift in time**, **stay**, **blocked by cost**, **never move**, or **fix compliance first** — each with the rule that decided it, tonnes of CO₂, and what the change costs.
 
 </td>
 <td width="33%" valign="top">
 
-### 🖥️ Client console
-`/console` — bring your own fleet
+### 🔭 Forecasting
+`/forecasting` — models on trial
 
-Register **your own** servers against real electricity zones, choose **manual** (approve every switch) or **auto** (the system switches itself), and watch real carbon-aware failover happen to *your* fleet — the commercial pitch, made concrete.
+ARIMA and CarbonLSTM forecasts at 1/3/6/12 h, each model's cleanest hour, and the **no-regret guard's** verdict on whether that delay was allowed — plus every model's verified track record.
+
+</td>
+<td width="33%" valign="top">
+
+### 📡 Pilot telemetry
+`/pilot` — what actually ran
+
+Decisions, chosen offsets and AWS dispatch outcomes from three independent scheduling pipelines running hourly on live EC2 across 13 regions.
 
 </td>
 </tr>
 </table>
+
+Also: `/console` (score one workload across the fleet), `/playground` (tune weights, add and remove servers, watch it switch or refuse), `/report` (printable audit), `/about` (what the project does and does not claim).
 
 <br/>
 
@@ -84,6 +86,26 @@ sequenceDiagram
 Same clock, same scoring, same data either way — the only variable is whether a human has to press a button before it takes effect.
 
 </details>
+
+<br/>
+
+## The live pilot
+
+Three scheduling policies run side by side, hourly, from a small orchestrator instance in `us-east-1`, dispatching real jobs to EC2 instances across the region fleet through AWS Systems Manager:
+
+| Pipeline | Policy |
+|---|---|
+| `aws-adaptive` | Reactive — scores current intensity, never delays |
+| `aws-lstm` | CarbonLSTM forecasts 12 h ahead, delays only when the guard allows |
+| `aws-arima` | ARIMA(2,1,2) forecasts, same guard |
+
+Every forecast is recorded and then scored against the intensity actually measured when its target hour arrives. That record — 25,000+ verified forecasts — decides whether a model is allowed to delay work at all:
+
+- **error is not enough.** ARIMA had the lower 1-hour error and still delivered **−3.8%** against a promised +12.7%, so the guard disabled it.
+- the same rule later withdrew **CarbonLSTM's 1-hour horizon** when it slipped to −0.5% delivered with 49.5% regret.
+- thresholds live in `data/forecast_calibration.json`. `scripts/reverify_and_calibrate.py` recommends; a human edits the `applied` block. Nothing re-enables a forecaster automatically.
+
+Scheduling itself is a `cron.d` entry on the orchestrator, and a daily teardown check terminates the whole fleet on a fixed date, so the pilot cannot outlive its budget.
 
 <br/>
 
@@ -148,7 +170,22 @@ npm run dev
 
 Open **`http://localhost:5173`** — the frontend proxies `/api/*` straight to the backend on `:8001`, so both need to be running.
 
-> Get a free Electricity Maps token at [electricitymaps.com](https://www.electricitymaps.com/) — the scoring engine and the historical replay both run on real values from that API, nothing here is randomly generated.
+<details>
+<summary><b>3 · Optional: historical replay and forecasting</b></summary>
+
+The licensed history and the trained weights are not in this repo. With your own
+Electricity Maps token:
+
+```bash
+cd carbon_scheduler
+python scripts/download_ci_history.py     # or import_yearly_csv.py for CSV exports
+python scripts/train_lstm.py              # writes models/lstm_{zone}.pt
+python scripts/export_public_evidence.py  # derived-only evidence -> data/public/
+```
+
+</details>
+
+> Get an Electricity Maps token at [electricitymaps.com](https://www.electricitymaps.com/); academic access is free on an institutional address. The scoring engine and the replay run on real measured values — nothing here is randomly generated.
 
 <br/>
 
@@ -160,13 +197,16 @@ Open **`http://localhost:5173`** — the frontend proxies `/api/*` straight to t
 |:------:|----------|------------------|
 | `GET`  | `/regions/` | Current region pool with live/simulated carbon + latency |
 | `GET`  | `/regions/zones` | Real electricity zones only (name/lat/lng) — powers the console's zone picker |
-| `GET`  | `/regions/history/range` | Start/end bounds of the real 2021–2025 dataset |
-| `GET`  | `/regions/history/at?timestamp=` | Real per-region carbon intensity at one real historical hour |
+| `GET`  | `/regions/history/range` | Bounds of the licensed 2021–2025 dataset — returns **403** unless `CADSS_SERVE_LICENSED_HISTORY=1` |
+| `GET`  | `/regions/history/at?timestamp=` | Per-region intensity at one historical hour — same 403 gate |
 | `POST` | `/score` | Filters by latency SLA, scores by weighted carbon/latency/resources, returns a ranked, explainable decision |
 | `POST` | `/forecast` | LSTM (per-zone, falls back to ARIMA) carbon forecast + best delay window |
 | `POST` | `/carbon/estimate` | Operational + embodied (Scope 3) lifecycle CO₂ estimate |
 | `POST` | `/scaling/elastic` | CarbonScaler-style elastic vCore recommendation |
 | `POST` | `/schedule/joint` | Joint spatial + temporal shift for delay-tolerant workloads |
+| `GET`  | `/pilot/telemetry` | Live pilot decisions and dispatch outcomes (instance identifiers stripped) |
+| `GET`  | `/forecasting/multi-stage` | ARIMA + CarbonLSTM forecasts at 1/3/6/12 h with the guard's decision per stage |
+| `GET`  | `/forecasting/verification` | Verified accuracy, direction and regret per model and horizon |
 | `GET`  | `/research/manifest` | Index of every reproducible research result exposed on the site |
 
 </div>
@@ -197,10 +237,11 @@ The response includes the ranked list, rejected regions with reasons, the final 
 
 No synthetic numbers back the headline claims on this site.
 
-- **Carbon intensity** — real hourly history (2021–2025) per electricity zone, sourced from Electricity Maps.
+- **Carbon intensity** — real hourly history (2021–2025) per electricity zone, sourced from Electricity Maps under academic access. Not redistributed here (see [licensing](#data-source-and-licensing)).
 - **Latency** — measured from real vantage points against real cloud endpoints (`carbon_scheduler/aws/measure_cloud_latency.py`).
 - **Forecasting** — a trained per-zone LSTM (`services/lstm_forecaster.py`) with an ARIMA(2,1,2) fallback, evaluated against held-out real data.
-- **Every research result** on the homepage traces back to a script in `carbon_scheduler/scripts/` that anyone can re-run.
+- **Live verification** — every forecast the pilot made, scored against the intensity measured at its target hour.
+- **Every research result** traces back to a script in `carbon_scheduler/scripts/` that anyone can re-run.
 
 <br/>
 
@@ -208,18 +249,23 @@ No synthetic numbers back the headline claims on this site.
 
 ```text
 carbon_scheduler/            FastAPI backend
-├── api.py                     scoring, forecasting, carbon-estimate endpoints
-├── history_api.py             real historical hour-by-hour lookup
+├── api.py                     scoring, forecasting, multi-stage + verification endpoints
+├── history_api.py             licensed history lookup (gated off by default)
 ├── research_api.py            reproducible research result manifest
-├── models/                    Region, Workload dataclasses + trained LSTMs
-├── services/                  scheduler, forecaster, electricity + simulator services
-├── scripts/                   every result on the site, as a re-runnable script
-└── data/                      real CI history, latency measurements, result JSON
+├── models/                    Region, Workload dataclasses (trained .pt weights are gitignored)
+├── services/                  scheduler, forecasters, failsafe engine + no-regret guard,
+│                              forecast tracker, calibration instrument
+├── aws/                       orchestrator deploy, the three pilot runners, SSM dispatch,
+│                              latency measurement, teardown
+├── scripts/                   every result in the report, as a re-runnable script
+└── data/                      result JSON; public/ holds the derived evidence that is safe
+                               to publish (licensed history and raw logs stay local)
 
 carbon_scheduler_ui/          React + Vite frontend
-├── src/pages/                 HomePage, PlaygroundPage, ConsolePage
-├── src/sections/              narrative site sections + console/ subcomponents
-├── src/hooks/                 useHistoricalReplay, useConsoleClock, useClientFleet…
+├── src/pages/                 Audit, AuditReport, Console, Forecasting, Pilot, Playground, About
+├── src/sim/                   in-browser port of the scheduler + audit model, with parity
+│                              tests against the Python engine
+├── src/hooks/                 useLiveScheduler, useClientFleet, useHistoricalReplay…
 └── src/components/            demo/, layout/, research/ building blocks
 ```
 
@@ -237,14 +283,41 @@ A carbon-aware scheduler can save carbon two different ways:
 1. **Structural** — knowing in advance which regions have permanently cleaner electricity (a one-time decision).
 2. **Adaptive** — reacting every hour to which region is cleanest *right now* (an always-on decision).
 
-`carbon_scheduler/scripts/held_out_generalization_test.py` separates these with a genuine held-out split (the static baseline never sees the years it's judged on), then `significance_test_adaptivity.py` tests whether the adaptive gain is statistically real. Both are re-run live to produce every number shown under **Decomposition** on the homepage — nothing is pasted in.
+A third question sits on top: whether a **forecast** should be acted on at all. `scripts/reverify_and_calibrate.py` answers it from verified outcomes rather than from error metrics.
+
+`carbon_scheduler/scripts/held_out_generalization_test.py` separates the first two with a genuine held-out split (the static baseline never sees the years it's judged on), then `significance_test_adaptivity.py` tests whether the adaptive gain is statistically real. Both are re-run live to produce every number shown under **Decomposition** on the homepage — nothing is pasted in.
 
 </details>
+
+<br/>
+
+## Data source and licensing
+
+Carbon-intensity data comes from **Electricity Maps** (<https://www.electricitymaps.com>),
+used under academic access granted for this undergraduate research project.
+
+Their Terms of Service permit academic use but not redistribution of the data
+itself. This repository therefore contains **no measured carbon-intensity
+values**:
+
+- the licensed 2021–2025 hourly history (`carbon_scheduler/data/history/`,
+  `data/raw_yearly/`) is not published — regenerate it with your own token via
+  `scripts/download_ci_history.py` or `scripts/import_yearly_csv.py`;
+- the raw pilot logs and forecast-verification records are not published either,
+  because each record carries measured intensity at a timestamp;
+- what is published, under `carbon_scheduler/data/public/`, is the derived
+  subset every result in the report is computed from: forecast error, direction
+  correctness, regret, percentage savings, region decisions, offsets, guard
+  status and dispatch outcomes. Generate it with
+  `python scripts/export_public_evidence.py`.
+
+If you cite or build on this work, attribute the underlying data to
+Electricity Maps.
 
 <br/>
 
 <div align="center">
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:5EE6C8,50:141c2b,100:0A0E15&height=120&section=footer" width="100%" alt="footer" />
 
-<sub>Built for a commercial-pitch demo — real scoring engine, your own fleet, your call on manual vs. automatic.</sub>
+<sub>Undergraduate research project · Sahyadri College of Engineering and Management · data by <a href="https://www.electricitymaps.com">Electricity Maps</a></sub>
 </div>

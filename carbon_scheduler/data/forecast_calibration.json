@@ -1,0 +1,434 @@
+{
+  "generated_at_utc": "2026-09-15T05:12:17.522651+00:00",
+  "cutover_utc": "2026-09-14T00:00:00+00:00",
+  "note": "`applied` is edited by a human only; runners read it. `recommended` is advisory.",
+  "recommended": {
+    "ARIMA(2,1,2)": {
+      "1": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 88,
+        "regimes": 1,
+        "reason": "n=88 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 17,
+            "mean_actual_savings_pct": 8.75,
+            "regret_rate_pct": 23.5,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 13,
+            "mean_actual_savings_pct": 7.9,
+            "regret_rate_pct": 15.4,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 8,
+            "mean_actual_savings_pct": 1.52,
+            "regret_rate_pct": 25.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 6,
+            "mean_actual_savings_pct": -1.21,
+            "regret_rate_pct": 33.3,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 5,
+            "mean_actual_savings_pct": -2.94,
+            "regret_rate_pct": 40.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 4,
+            "mean_actual_savings_pct": -4.34,
+            "regret_rate_pct": 50.0,
+            "regimes": 1
+          }
+        ]
+      },
+      "3": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 88,
+        "regimes": 1,
+        "reason": "n=88 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 27,
+            "mean_actual_savings_pct": 5.07,
+            "regret_rate_pct": 37.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 20,
+            "mean_actual_savings_pct": 12.19,
+            "regret_rate_pct": 35.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 16,
+            "mean_actual_savings_pct": 13.99,
+            "regret_rate_pct": 25.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 14,
+            "mean_actual_savings_pct": 13.94,
+            "regret_rate_pct": 28.6,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 11,
+            "mean_actual_savings_pct": 9.66,
+            "regret_rate_pct": 36.4,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 7,
+            "mean_actual_savings_pct": -8.33,
+            "regret_rate_pct": 57.1,
+            "regimes": 1
+          }
+        ]
+      },
+      "6": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 88,
+        "regimes": 1,
+        "reason": "n=88 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 39,
+            "mean_actual_savings_pct": 6.94,
+            "regret_rate_pct": 28.2,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 27,
+            "mean_actual_savings_pct": 8.55,
+            "regret_rate_pct": 25.9,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 24,
+            "mean_actual_savings_pct": 10.61,
+            "regret_rate_pct": 25.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 17,
+            "mean_actual_savings_pct": 12.36,
+            "regret_rate_pct": 29.4,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 11,
+            "mean_actual_savings_pct": 8.51,
+            "regret_rate_pct": 45.5,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 9,
+            "mean_actual_savings_pct": 2.95,
+            "regret_rate_pct": 55.6,
+            "regimes": 1
+          }
+        ]
+      },
+      "12": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 88,
+        "regimes": 1,
+        "reason": "n=88 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 40,
+            "mean_actual_savings_pct": 8.89,
+            "regret_rate_pct": 25.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 28,
+            "mean_actual_savings_pct": 9.81,
+            "regret_rate_pct": 21.4,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 25,
+            "mean_actual_savings_pct": 11.7,
+            "regret_rate_pct": 20.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 23,
+            "mean_actual_savings_pct": 11.42,
+            "regret_rate_pct": 21.7,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 15,
+            "mean_actual_savings_pct": 10.12,
+            "regret_rate_pct": 33.3,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 10,
+            "mean_actual_savings_pct": 6.99,
+            "regret_rate_pct": 50.0,
+            "regimes": 1
+          }
+        ]
+      }
+    },
+    "CarbonLSTM": {
+      "1": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 78,
+        "regimes": 1,
+        "reason": "n=78 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 33,
+            "mean_actual_savings_pct": 7.98,
+            "regret_rate_pct": 30.3,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 24,
+            "mean_actual_savings_pct": 10.54,
+            "regret_rate_pct": 29.2,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 18,
+            "mean_actual_savings_pct": 11.08,
+            "regret_rate_pct": 27.8,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 9,
+            "mean_actual_savings_pct": 19.19,
+            "regret_rate_pct": 22.2,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 6,
+            "mean_actual_savings_pct": 16.0,
+            "regret_rate_pct": 33.3,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 4,
+            "mean_actual_savings_pct": 11.18,
+            "regret_rate_pct": 50.0,
+            "regimes": 1
+          }
+        ]
+      },
+      "3": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 78,
+        "regimes": 1,
+        "reason": "n=78 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 37,
+            "mean_actual_savings_pct": 9.48,
+            "regret_rate_pct": 21.6,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 25,
+            "mean_actual_savings_pct": 16.28,
+            "regret_rate_pct": 12.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 22,
+            "mean_actual_savings_pct": 15.33,
+            "regret_rate_pct": 13.6,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 9,
+            "mean_actual_savings_pct": 28.68,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 6,
+            "mean_actual_savings_pct": 30.25,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 4,
+            "mean_actual_savings_pct": 32.55,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          }
+        ]
+      },
+      "6": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 78,
+        "regimes": 1,
+        "reason": "n=78 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 39,
+            "mean_actual_savings_pct": 13.88,
+            "regret_rate_pct": 15.4,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 25,
+            "mean_actual_savings_pct": 18.31,
+            "regret_rate_pct": 12.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 23,
+            "mean_actual_savings_pct": 17.45,
+            "regret_rate_pct": 13.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 10,
+            "mean_actual_savings_pct": 29.62,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 7,
+            "mean_actual_savings_pct": 24.33,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 4,
+            "mean_actual_savings_pct": 29.09,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          }
+        ]
+      },
+      "12": {
+        "verdict": "insufficient_evidence",
+        "recommended_threshold_pct": 1000.0,
+        "n": 78,
+        "regimes": 1,
+        "reason": "n=78 (need >=100), regimes=1 (need >=5)",
+        "sweep": [
+          {
+            "threshold_pct": 5.0,
+            "n": 39,
+            "mean_actual_savings_pct": 17.15,
+            "regret_rate_pct": 12.8,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 10.0,
+            "n": 29,
+            "mean_actual_savings_pct": 18.46,
+            "regret_rate_pct": 10.3,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 15.0,
+            "n": 23,
+            "mean_actual_savings_pct": 15.63,
+            "regret_rate_pct": 13.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 20.0,
+            "n": 14,
+            "mean_actual_savings_pct": 21.56,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 25.0,
+            "n": 10,
+            "mean_actual_savings_pct": 26.61,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          },
+          {
+            "threshold_pct": 30.0,
+            "n": 10,
+            "mean_actual_savings_pct": 26.61,
+            "regret_rate_pct": 0.0,
+            "regimes": 1
+          }
+        ]
+      }
+    }
+  },
+  "applied": {
+    "ARIMA(2,1,2)": {
+      "1": 1000.0,
+      "3": 1000.0,
+      "6": 1000.0,
+      "12": 1000.0
+    },
+    "CarbonLSTM": {
+      "1": 1000.0,
+      "3": 15.0,
+      "6": 15.0,
+      "12": 15.0
+    }
+  },
+  "applied_note": "CarbonLSTM 1h set to never-delay 2026-09-23 (applied on the orchestrator instance, which is what the live runners read)."
+}

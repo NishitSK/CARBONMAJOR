@@ -1,6 +1,11 @@
 import random
+import warnings
 from typing import List, Dict
 from statsmodels.tsa.arima.model import ARIMA
+
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
+
 
 
 def generate_synthetic_history(base_ci: float, hours: int = 48, seed: int = None) -> List[float]:

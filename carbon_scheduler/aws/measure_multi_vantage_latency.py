@@ -22,8 +22,9 @@ import boto3
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import config
 
-INSTANCES_PATH = os.path.join(config.DATA_DIR, "pilot_instances.json")
+INSTANCES_PATH = os.path.join(config.DATA_DIR, "pilot_instances_lstm.json")
 OUT_PATH = os.path.join(config.DATA_DIR, "multi_vantage_latency.json")
+AWS_PROFILE = "aws-lstm"
 
 PROBER_REGIONS = [
     "us-east-1 (N. Virginia)",     # North America
@@ -59,7 +60,7 @@ def probe_from(prober_name, instances):
     script = PROBE_SCRIPT.format(targets_json=json.dumps(targets))
     script_b64 = base64.b64encode(script.encode()).decode()
 
-    ssm = boto3.client("ssm", region_name=prober_meta["aws_region"])
+    ssm = boto3.Session(profile_name=AWS_PROFILE).client("ssm", region_name=prober_meta["aws_region"])
     resp = ssm.send_command(
         InstanceIds=[prober_meta["instance_id"]],
         DocumentName="AWS-RunShellScript",
@@ -95,7 +96,11 @@ def main():
     matrix = {}
     for prober in PROBER_REGIONS:
         print(f"Probing from {prober}...")
-        result = probe_from(prober, instances)
+        try:
+            result = probe_from(prober, instances)
+        except Exception as e:
+            print(f"  skipped ({e})")
+            continue
         if result:
             matrix[prober] = result
             print(f"  done ({len(result)} targets measured)")

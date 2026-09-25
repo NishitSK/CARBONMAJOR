@@ -1,17 +1,33 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import PlaygroundPage from './pages/PlaygroundPage';
+import { TourProvider } from './context/TourContext';
+import { DataModeProvider } from './data/DataModeContext';
+import AwsSpotlightTour from './components/common/AwsSpotlightTour';
+import AuditPage from './pages/AuditPage';
+import AuditReportPage from './pages/AuditReportPage';
 import ConsolePage from './pages/ConsolePage';
+import ForecastingPage from './pages/ForecastingPage';
+import PilotTelemetryPage from './pages/PilotTelemetryPage';
+import PlaygroundPage from './pages/PlaygroundPage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/playground" element={<PlaygroundPage />} />
-        <Route path="/console" element={<ConsolePage />} />
-      </Routes>
+      <DataModeProvider>
+        <TourProvider>
+          <Routes>
+            <Route path="/" element={<AuditPage />} />
+            <Route path="/report" element={<AuditReportPage />} />
+            <Route path="/console" element={<ConsolePage />} />
+            <Route path="/forecasting" element={<ForecastingPage />} />
+            <Route path="/pilot" element={<PilotTelemetryPage />} />
+            <Route path="/playground" element={<PlaygroundPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+          <AwsSpotlightTour />
+        </TourProvider>
+      </DataModeProvider>
     </BrowserRouter>
   );
 }

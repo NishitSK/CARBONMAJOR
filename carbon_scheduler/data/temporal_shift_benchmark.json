@@ -1,0 +1,131 @@
+{
+  "n_zones": 10,
+  "n_anchors_scored": 2920,
+  "deadlines_tested_hours": [
+    1,
+    4,
+    8,
+    24
+  ],
+  "results_by_deadline": {
+    "1": {
+      "n": 2920,
+      "no_shift_mean_ci": 20.98120205479452,
+      "synthetic_mean_ci": 21.06562671232877,
+      "real_ai_mean_ci": 21.06562671232877,
+      "oracle_mean_ci": 20.457585616438354,
+      "synthetic_improve_vs_no_shift_pct": -0.40238236738660665,
+      "real_ai_improve_vs_no_shift_pct": -0.40238236738660665,
+      "oracle_improve_vs_no_shift_pct": 2.4956455640086177,
+      "real_ai_minus_synthetic_pp": 0.0,
+      "real_ai_pct_of_achievable_gap_closed": -16.123377982419992,
+      "arima_fallback_count": 0,
+      "lstm_fallback_count": 0
+    },
+    "4": {
+      "n": 2920,
+      "no_shift_mean_ci": 20.98120205479452,
+      "synthetic_mean_ci": 21.143657534246575,
+      "real_ai_mean_ci": 20.432126712328767,
+      "oracle_mean_ci": 19.262931506849316,
+      "synthetic_improve_vs_no_shift_pct": -0.7742906198976945,
+      "real_ai_improve_vs_no_shift_pct": 2.616987058376286,
+      "oracle_improve_vs_no_shift_pct": 8.189571519581033,
+      "real_ai_minus_synthetic_pp": 3.3912776782739806,
+      "real_ai_pct_of_achievable_gap_closed": 31.955115748353187,
+      "arima_fallback_count": 0,
+      "lstm_fallback_count": 0
+    },
+    "8": {
+      "n": 2920,
+      "no_shift_mean_ci": 20.98120205479452,
+      "synthetic_mean_ci": 21.161311643835617,
+      "real_ai_mean_ci": 20.76362671232877,
+      "oracle_mean_ci": 18.731243150684932,
+      "synthetic_improve_vs_no_shift_pct": -0.85843312776229,
+      "real_ai_improve_vs_no_shift_pct": 1.0370013209802287,
+      "oracle_improve_vs_no_shift_pct": 10.723689225400875,
+      "real_ai_minus_synthetic_pp": 1.8954344487425185,
+      "real_ai_pct_of_achievable_gap_closed": 9.6701918452086,
+      "arima_fallback_count": 0,
+      "lstm_fallback_count": 0
+    },
+    "24": {
+      "n": 2920,
+      "no_shift_mean_ci": 20.98120205479452,
+      "synthetic_mean_ci": 21.138075342465754,
+      "real_ai_mean_ci": 19.21833219178082,
+      "oracle_mean_ci": 17.47666780821918,
+      "synthetic_improve_vs_no_shift_pct": -0.7476849384584588,
+      "real_ai_improve_vs_no_shift_pct": 8.402139488527807,
+      "oracle_improve_vs_no_shift_pct": 16.703210032594395,
+      "real_ai_minus_synthetic_pp": 9.149824426986266,
+      "real_ai_pct_of_achievable_gap_closed": 50.30254347596659,
+      "arima_fallback_count": 0,
+      "lstm_fallback_count": 0
+    }
+  },
+  "arima_fit_diagnostics_per_zone": {
+    "US-MIDA-PJM": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 24,
+      "monthly_fits_converged_clean": 0
+    },
+    "IE": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 8,
+      "monthly_fits_converged_clean": 16
+    },
+    "DE": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 7,
+      "monthly_fits_converged_clean": 17
+    },
+    "IN-WE": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 3,
+      "monthly_fits_converged_clean": 21
+    },
+    "CA-QC": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 18,
+      "monthly_fits_converged_clean": 6
+    },
+    "US-NW-PACW": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 7,
+      "monthly_fits_converged_clean": 17
+    },
+    "SE": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 22,
+      "monthly_fits_converged_clean": 2
+    },
+    "SG": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 11,
+      "monthly_fits_converged_clean": 13
+    },
+    "JP": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 0,
+      "monthly_fits_converged_clean": 24
+    },
+    "US-MIDW-MISO": {
+      "monthly_fits_attempted": 24,
+      "monthly_fits_failed": 0,
+      "monthly_fits_converged_with_warnings": 21,
+      "monthly_fits_converged_clean": 3
+    }
+  },
+  "smoke_test": false
+}

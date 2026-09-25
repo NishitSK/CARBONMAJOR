@@ -55,7 +55,10 @@ class ElectricityService:
         results = {}
         for region_name, metadata in self.REGION_MAP.items():
             carbon = self.get_carbon_intensity(metadata["zone"])
-            
+            # Must be captured before the fallback below fills `carbon`,
+            # otherwise fallback values are reported as live.
+            is_live = carbon is not None
+
             # Fallback values for Demo Mode or API Failure
             if carbon is None:
                 # Use a deterministic "pseudo-real" fallback based on zone name hash
@@ -67,6 +70,6 @@ class ElectricityService:
                 "lat": metadata["lat"],
                 "lng": metadata["lng"],
                 "zone": metadata["zone"],
-                "is_live": carbon is not None
+                "is_live": is_live
             }
         return results

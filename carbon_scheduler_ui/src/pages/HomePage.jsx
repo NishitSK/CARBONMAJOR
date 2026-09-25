@@ -1,4 +1,5 @@
 import React from 'react';
+import TopNavbar from '../components/layout/TopNavbar';
 import SectionNav from '../components/layout/SectionNav';
 import HeroSection from '../sections/HeroSection';
 import HistoricalReplaySection from '../sections/HistoricalReplaySection';
@@ -10,15 +11,16 @@ import '../styles/sections.css';
 
 export default function HomePage() {
   return (
-    <>
+    <div className="dashboard-container">
+      <TopNavbar />
       <SectionNav />
-      <div className="dashboard-container">
+      <main>
         <HeroSection />
         <HistoricalReplaySection />
         <DecompositionSection />
         <ForecastingSection />
         <SupportingEvidenceSection />
-      </div>
-    </>
+      </main>
+    </div>
   );
 }

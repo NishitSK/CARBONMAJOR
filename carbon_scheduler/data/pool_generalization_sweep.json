@@ -1,0 +1,646 @@
+{
+  "pool_sweeps": {
+    "full_12": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__eu-west-1 (Ireland)": {
+      "pool_regions": [
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__eu-central-1 (Frankfurt)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__eu-north-1 (Sweden)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "ca-central-1 (Canada)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 32.89114594742607,
+      "static_lookup_avg_ci": 32.913187294633076,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 0.0669681335013152,
+      "scheduler_vs_fixed_baseline_pct": 92.04842198216016,
+      "winner_distribution": {
+        "ca-central-1 (Canada)": 7269,
+        "us-west-2 (Oregon)": 35
+      },
+      "top_region": "ca-central-1 (Canada)",
+      "top_region_share_pct": 99.52081051478642
+    },
+    "leave_out__ap-south-1 (Mumbai)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__ap-southeast-2 (Sydney)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__ap-southeast-1 (Singapore)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__ap-northeast-1 (Tokyo)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__us-east-1 (N. Virginia)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__sa-east-1 (Sao Paulo)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__ca-central-1 (Canada)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 23.62149917853231,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 0.04763817649194156,
+      "scheduler_vs_fixed_baseline_pct": 94.28939952664867,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 7294,
+        "us-west-2 (Oregon)": 10
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 99.86308871851041
+    },
+    "leave_out__us-west-2 (Oregon)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.099442771084338,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.488090224145641,
+      "scheduler_vs_fixed_baseline_pct": 94.65736330300115,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6053,
+        "ca-central-1 (Canada)": 1251
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.8723986856517
+    },
+    "leave_out__us-east-2 (Ohio)": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)"
+      ],
+      "pool_size": 11,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "leave_out__sweden_and_canada": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 10,
+      "static_lookup_region": "us-west-2 (Oregon)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 217.62526150054765,
+      "static_lookup_avg_ci": 263.47159090909093,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 17.400862556131237,
+      "scheduler_vs_fixed_baseline_pct": 47.38814365907434,
+      "winner_distribution": {
+        "eu-west-1 (Ireland)": 1608,
+        "us-east-1 (N. Virginia)": 253,
+        "us-west-2 (Oregon)": 4335,
+        "eu-central-1 (Frankfurt)": 1012,
+        "ap-northeast-1 (Tokyo)": 96
+      },
+      "top_region": "us-west-2 (Oregon)",
+      "top_region_share_pct": 59.35104052573932
+    },
+    "eu_only": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)"
+      ],
+      "pool_size": 3,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 23.6327573932092,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 0.0,
+      "scheduler_vs_fixed_baseline_pct": 94.28667780413744,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 7304
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 100.0
+    },
+    "asia_pacific_only": {
+      "pool_regions": [
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)"
+      ],
+      "pool_size": 4,
+      "static_lookup_region": "ap-northeast-1 (Tokyo)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 457.4642141292442,
+      "static_lookup_avg_ci": 473.0328943044907,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 3.2912468377357555,
+      "scheduler_vs_fixed_baseline_pct": -10.59396941757005,
+      "winner_distribution": {
+        "ap-northeast-1 (Tokyo)": 3115,
+        "ap-southeast-1 (Singapore)": 4186,
+        "ap-south-1 (Mumbai)": 3
+      },
+      "top_region": "ap-southeast-1 (Singapore)",
+      "top_region_share_pct": 57.31106243154436
+    },
+    "americas_only": {
+      "pool_regions": [
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 5,
+      "static_lookup_region": "ca-central-1 (Canada)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 32.89114594742607,
+      "static_lookup_avg_ci": 32.913187294633076,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 0.0669681335013152,
+      "scheduler_vs_fixed_baseline_pct": 92.04842198216016,
+      "winner_distribution": {
+        "ca-central-1 (Canada)": 7269,
+        "us-west-2 (Oregon)": 35
+      },
+      "top_region": "ca-central-1 (Canada)",
+      "top_region_share_pct": 99.52081051478642
+    }
+  },
+  "weight_sweeps": {
+    "w_carbon_0.500": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "w_carbon_0.571": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "w_carbon_0.650": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "w_carbon_0.750": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    },
+    "w_carbon_0.850": {
+      "pool_regions": [
+        "eu-west-1 (Ireland)",
+        "eu-central-1 (Frankfurt)",
+        "eu-north-1 (Sweden)",
+        "ap-south-1 (Mumbai)",
+        "ap-southeast-2 (Sydney)",
+        "ap-southeast-1 (Singapore)",
+        "ap-northeast-1 (Tokyo)",
+        "us-east-1 (N. Virginia)",
+        "sa-east-1 (Sao Paulo)",
+        "ca-central-1 (Canada)",
+        "us-west-2 (Oregon)",
+        "us-east-2 (Ohio)"
+      ],
+      "pool_size": 12,
+      "static_lookup_region": "eu-north-1 (Sweden)",
+      "n_decisions": 7304,
+      "scheduler_avg_ci": 22.09677026286966,
+      "static_lookup_avg_ci": 23.6327573932092,
+      "fixed_baseline_avg_ci": 413.64300109529023,
+      "scheduler_vs_static_lookup_pct": 6.499398715026372,
+      "scheduler_vs_fixed_baseline_pct": 94.65800939352066,
+      "winner_distribution": {
+        "eu-north-1 (Sweden)": 6051,
+        "ca-central-1 (Canada)": 1249,
+        "us-west-2 (Oregon)": 4
+      },
+      "top_region": "eu-north-1 (Sweden)",
+      "top_region_share_pct": 82.84501642935378
+    }
+  }
+}
