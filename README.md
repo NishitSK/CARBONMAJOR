@@ -101,8 +101,8 @@ Three scheduling policies run side by side, hourly, from a small orchestrator in
 
 Every forecast is recorded and then scored against the intensity actually measured when its target hour arrives. That record — 25,000+ verified forecasts — decides whether a model is allowed to delay work at all:
 
-- **error is not enough.** ARIMA had the lower 1-hour error and still delivered **−3.8%** against a promised +12.7%, so the guard disabled it.
-- the same rule later withdrew **CarbonLSTM's 1-hour horizon** when it slipped to −0.5% delivered with 49.5% regret.
+- **error is not enough.** ARIMA had the lower 1-hour error and still delivered net-negative savings on the delays it recommended, so the guard disabled it.
+- the same rule later flagged **CarbonLSTM's 1-hour forecasts** (−0.5% delivered, 49.5% regret) and set that horizon to never delay. In this pilot that changed no live decision — the runner's 1-hour stage can't propose a delay, and dispatch uses the 6-hour stage.
 - thresholds live in `data/forecast_calibration.json`. `scripts/reverify_and_calibrate.py` recommends; a human edits the `applied` block. Nothing re-enables a forecaster automatically.
 
 Scheduling itself is a `cron.d` entry on the orchestrator, and a daily teardown check terminates the whole fleet on a fixed date, so the pilot cannot outlive its budget.

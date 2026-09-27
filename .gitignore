@@ -108,3 +108,4 @@ carbon_scheduler/models/*.pt
 # Ad-hoc print-based smoke scripts, superseded by the UI parity tests
 /test_scheduler.py
 /test_joint_scheduler.py
+/HANDOFF_*.md
