@@ -105,6 +105,10 @@ carbon_scheduler/silent_runner.vbs
 # regenerable with scripts/train_lstm.py once you have your own data.
 carbon_scheduler/models/*.pt
 
+# Retraining experiment workspace (scripts/download_history_range.py,
+# retrain_lstm_sets.py): licensed 2026 history and the weight sets trained on it.
+carbon_scheduler/data/retrain/
+
 # Ad-hoc print-based smoke scripts, superseded by the UI parity tests
 /test_scheduler.py
 /test_joint_scheduler.py

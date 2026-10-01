@@ -10,11 +10,13 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](carbon_scheduler/api.py)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white)](carbon_scheduler_ui)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white)](carbon_scheduler_ui/vite.config.js)
-[![Data](https://img.shields.io/badge/Data-Real%202021--2025%20grid%20history-3DDC84?style=for-the-badge)](#-the-data)
+[![Data](https://img.shields.io/badge/Data-Real%202021--2025%20grid%20history-3DDC84?style=for-the-badge)](#the-data)
 
 <br/>
 
-**[Live showcase](#-what-this-actually-does)** · **[Quick start](#-quick-start)** · **[API](#-api-reference)** · **[Architecture](#-architecture)** · **[Research](#-research-methodology)**
+**[What it does](#what-this-actually-does)** · **[Live pilot](#the-live-pilot)** · **[Quick start](#quick-start)** · **[API](#api-reference)** · **[Architecture](#architecture)** · **[Research](#research-methodology)**
+
+New here? Read **[the guide for humans](EVERYTHING_YOU_NEED_TO_KNOW_FOR_HUMANS.md)**. Working on this repo with an AI assistant? Point it at **[the guide for AI](EVERYTHING_YOU_NEED_TO_KNOW_FOR_AI.md)**.
 
 </div>
 
@@ -30,7 +32,7 @@ Three things live on top of the same scoring engine, each answering a different 
 <tr>
 <td width="33%" valign="top">
 
-### 📋 Placement Audit
+### Placement Audit
 `/` — the product
 
 Triage a fleet workload by workload: **move**, **shift in time**, **stay**, **blocked by cost**, **never move**, or **fix compliance first** — each with the rule that decided it, tonnes of CO₂, and what the change costs.
@@ -38,7 +40,7 @@ Triage a fleet workload by workload: **move**, **shift in time**, **stay**, **bl
 </td>
 <td width="33%" valign="top">
 
-### 🔭 Forecasting
+### Forecasting
 `/forecasting` — models on trial
 
 ARIMA and CarbonLSTM forecasts at 1/3/6/12 h, each model's cleanest hour, and the **no-regret guard's** verdict on whether that delay was allowed — plus every model's verified track record.
@@ -46,10 +48,10 @@ ARIMA and CarbonLSTM forecasts at 1/3/6/12 h, each model's cleanest hour, and th
 </td>
 <td width="33%" valign="top">
 
-### 📡 Pilot telemetry
+### Pilot telemetry
 `/pilot` — what actually ran
 
-Decisions, chosen offsets and AWS dispatch outcomes from three independent scheduling pipelines running hourly on live EC2 across 13 regions.
+Decisions, chosen offsets and AWS dispatch outcomes from three independent scheduling pipelines that ran on live EC2 from 9 to 28 September 2026.
 
 </td>
 </tr>
@@ -91,7 +93,7 @@ Same clock, same scoring, same data either way — the only variable is whether 
 
 ## The live pilot
 
-Three scheduling policies run side by side, hourly, from a small orchestrator instance in `us-east-1`, dispatching real jobs to EC2 instances across the region fleet through AWS Systems Manager:
+From 9 to 28 September 2026, three scheduling policies ran side by side in one AWS account, from a small orchestrator instance in `us-east-1`, dispatching real jobs to a 12-instance EC2 fleet through AWS Systems Manager. The pilot is finished and the fleet has been terminated; what remains is the record.
 
 | Pipeline | Policy |
 |---|---|
@@ -99,13 +101,44 @@ Three scheduling policies run side by side, hourly, from a small orchestrator in
 | `aws-lstm` | CarbonLSTM forecasts 12 h ahead, delays only when the guard allows |
 | `aws-arima` | ARIMA(2,1,2) forecasts, same guard |
 
-Every forecast is recorded and then scored against the intensity actually measured when its target hour arrives. That record — 25,000+ verified forecasts — decides whether a model is allowed to delay work at all:
+The final record is 390 reactive, 390 CarbonLSTM and 391 ARIMA cycles, and 38,185 verified forecasts. Every forecast was recorded and then scored against the intensity actually measured when its target hour arrived:
+
+| Model | Horizon | Verified | Direction correct | Regret |
+|---|---|---|---|---|
+| ARIMA(2,1,2) | 1 h | 4,801 | 64.8% | 19.1% |
+| ARIMA(2,1,2) | 3 h | 4,794 | 61.3% | 26.2% |
+| ARIMA(2,1,2) | 6 h | 4,786 | 59.9% | 27.8% |
+| ARIMA(2,1,2) | 12 h | 4,708 | 57.5% | 28.9% |
+| CarbonLSTM | 1 h | 4,798 | 63.1% | 17.8% |
+| CarbonLSTM | 3 h | 4,792 | 68.7% | 18.8% |
+| CarbonLSTM | 6 h | 4,782 | 74.9% | 17.6% |
+| CarbonLSTM | 12 h | 4,724 | 78.1% | 19.4% |
+
+<sub>Pooled over the whole pilot, from `scripts/summarize_forecast_results.py`. The first days include a defect that fitted the live forecasters on year-old history, which hurts ARIMA most.</sub>
+
+That record decides whether a model is allowed to delay work at all:
 
 - **error is not enough.** ARIMA had the lower 1-hour error and still delivered net-negative savings on the delays it recommended, so the guard disabled it.
-- the same rule later flagged **CarbonLSTM's 1-hour forecasts** (−0.5% delivered, 49.5% regret) and set that horizon to never delay. In this pilot that changed no live decision — the runner's 1-hour stage can't propose a delay, and dispatch uses the 6-hour stage.
+- on 20 September the same rule flagged **CarbonLSTM's 1-hour forecasts** (−0.5% delivered, 49.5% regret on the post-fix record at that date) and set that horizon to never delay. In this pilot that changed no live decision — the runner's 1-hour stage can't propose a delay, and dispatch uses the 6-hour stage.
+- at teardown the guard had ARIMA disabled at every horizon and CarbonLSTM disabled at 1 hour, with a 15% promised-saving threshold at 3, 6 and 12 hours.
 - thresholds live in `data/forecast_calibration.json`. `scripts/reverify_and_calibrate.py` recommends; a human edits the `applied` block. Nothing re-enables a forecaster automatically.
 
-Scheduling itself is a `cron.d` entry on the orchestrator, and a daily teardown check terminates the whole fleet on a fixed date, so the pilot cannot outlive its budget.
+Scheduling itself was a `cron.d` entry on the orchestrator, and a daily teardown check terminates the whole fleet on a fixed date, so a pilot cannot outlive its budget.
+
+Known limits of this pilot: one cloud provider, 19 days in one season, cycles were irregular in the first week, and the Tokyo instance sat stopped from 13 September, so dispatches to it failed.
+
+### Does retraining on newer data help?
+
+The pilot's CarbonLSTM weights were trained on 2021–2025 and never updated. After the pilot they were retrained with history through 31 July 2026 and compared on a held-out window, 1 August to 27 September 2026, across 13 zones. A control set, retrained on the same 2021–2025 data with a different seed, shows how much the numbers move from retraining alone.
+
+| Model | Mean error vs pilot weights | Direction correct (6 h) | Regret | Saving per decision |
+|---|---|---|---|---|
+| Pilot weights (2021–2025) | 100 | 74.9% | 21.8% | 4.37% |
+| Control (same data, reseeded) | 102.3 | 75.8% | 20.8% | 4.40% |
+| Retrained (to 31 July 2026) | 99.4 | 76.5% | 19.3% | 4.61% |
+| Persistence | 104.4 | n/a | never delays | 0 |
+
+The retrained model is slightly better on every decision metric, but the gain is about the size of the retraining noise the control exposes, and each set was trained once. It is reported as a small, unconfirmed improvement. Per-zone numbers are in `data/public/lstm_retrain_backtest.json`; the scripts are `download_history_range.py`, `retrain_lstm_sets.py` and `backtest_lstm_retrain.py`.
 
 <br/>
 
@@ -178,10 +211,12 @@ Electricity Maps token:
 
 ```bash
 cd carbon_scheduler
-python scripts/download_ci_history.py     # or import_yearly_csv.py for CSV exports
+python scripts/import_yearly_csv.py       # multi-year CSV exports -> data/history/
 python scripts/train_lstm.py              # writes models/lstm_{zone}.pt
 python scripts/export_public_evidence.py  # derived-only evidence -> data/public/
 ```
+
+`scripts/download_ci_history.py` is the API alternative, but it fetches only the trailing 10 days and **replaces** each `data/history/ci_history_{zone}.json`. Do not run it over a multi-year import. To add a date range without touching `data/history/`, use `scripts/download_history_range.py`.
 
 </details>
 
@@ -239,7 +274,7 @@ No synthetic numbers back the headline claims on this site.
 
 - **Carbon intensity** — real hourly history (2021–2025) per electricity zone, sourced from Electricity Maps under academic access. Not redistributed here (see [licensing](#data-source-and-licensing)).
 - **Latency** — measured from real vantage points against real cloud endpoints (`carbon_scheduler/aws/measure_cloud_latency.py`).
-- **Forecasting** — a trained per-zone LSTM (`services/lstm_forecaster.py`) with an ARIMA(2,1,2) fallback, evaluated against held-out real data.
+- **Forecasting** — a trained per-zone LSTM (`services/lstm_forecaster.py`, 24-hour input, 6-hour output) with an ARIMA(2,1,2) fallback, evaluated against held-out real data.
 - **Live verification** — every forecast the pilot made, scored against the intensity measured at its target hour.
 - **Every research result** traces back to a script in `carbon_scheduler/scripts/` that anyone can re-run.
 
@@ -302,7 +337,7 @@ values**:
 
 - the licensed 2021–2025 hourly history (`carbon_scheduler/data/history/`,
   `data/raw_yearly/`) is not published — regenerate it with your own token via
-  `scripts/download_ci_history.py` or `scripts/import_yearly_csv.py`;
+  `scripts/import_yearly_csv.py` (or `scripts/download_ci_history.py` for the trailing 10 days);
 - the raw pilot logs and forecast-verification records are not published either,
   because each record carries measured intensity at a timestamp;
 - what is published, under `carbon_scheduler/data/public/`, is the derived
